@@ -5,10 +5,6 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rss_reader", "rss_reader.csproj", "{C2B45AE9-105C-45C5-B7B3-8CFA0B73C942}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{424758F4-E012-409A-B5F0-0384651315C7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rss_reader_tests", "tests\rss_reader_tests\rss_reader_tests.csproj", "{C800AD5F-8707-47D2-8EB3-84F4A7F2BB6B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +25,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EACD3D82-8B58-4D5A-9565-15C266B3715B}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C800AD5F-8707-47D2-8EB3-84F4A7F2BB6B} = {424758F4-E012-409A-B5F0-0384651315C7}
 	EndGlobalSection
 EndGlobal

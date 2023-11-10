@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\rss_reader.csproj" />
+  </ItemGroup>
+
 </Project>
