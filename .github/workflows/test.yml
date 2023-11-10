@@ -12,10 +12,10 @@ jobs:
         dotnet-version: '7.0.x' # Assurez-vous que cela correspond à votre version de .NET
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore 
 
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build rss_reader_tests/rss_reader_tests.csproj --no-restore
 
     - name: Run tests
       run: dotnet test rss_reader_tests/rss_reader_tests.csproj --no-build
