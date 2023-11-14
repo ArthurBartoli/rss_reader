@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="rss_reader_tests\**" />
+    <EmbeddedResource Remove="rss_reader_tests\**" />
+    <None Remove="rss_reader_tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="xunit" Version="2.4.2" />
 	<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
 		<_Parameter1>rss_reader_tests</_Parameter1>
