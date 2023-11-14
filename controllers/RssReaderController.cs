@@ -36,6 +36,10 @@ namespace Controllers{
                 XDocument doc = (XDocument) ParseFeed(url);
                 Feed newFeed = new Feed();
 
+                newFeed.Title = doc.Descendants("title").First().Value;
+                newFeed.Description = doc.Descendants("description").First().Value;
+                newFeed.Category = doc.Descendants("category").First().Value;
+
                 foreach (XElement item in doc.Descendants("item"))
                 {
                     Article newArticle = new Article();
