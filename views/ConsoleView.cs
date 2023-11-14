@@ -1,7 +1,7 @@
 using Models;
 
 namespace Views {
-    class ConsoleView {
+    internal class ConsoleView {
         public void DisplayArticle(Article article) {
             Console.WriteLine($"* Titre: {article.Title}");
             Console.WriteLine($"* Content: {article.Date}");
