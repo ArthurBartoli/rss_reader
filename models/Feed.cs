@@ -3,6 +3,8 @@ namespace Models {
         public string Title { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
+        public string LastBuildDate { get; set; }
+        public string Link { get; set; }
         public List<Article> Articles { get; set; }
 
         // Constructor initiates the list

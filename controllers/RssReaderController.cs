@@ -39,13 +39,15 @@ namespace Controllers{
                 newFeed.Title = doc.Descendants("title").First().Value;
                 newFeed.Description = doc.Descendants("description").First().Value;
                 newFeed.Category = doc.Descendants("category").First().Value;
+                newFeed.Link = doc.Descendants("link").First().Value;
+                newFeed.LastBuildDate = doc.Descendants("lastBuildDate").First().Value;
 
                 foreach (XElement item in doc.Descendants("item"))
                 {
                     Article newArticle = new Article();
                     newArticle.Title = item.Element("title")?.Value;
                     newArticle.Link = item.Element("link")?.Value;
-                    newArticle.Date = item.Element("pubDate")?.Value;
+                    newArticle.PubDate = item.Element("pubDate")?.Value;
                     newArticle.Description = item.Element("description")?.Value;
 
                     newFeed.Articles.Add(newArticle);
