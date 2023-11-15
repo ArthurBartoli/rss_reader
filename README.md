@@ -16,3 +16,4 @@ Notes/Checkpoints
 ### 08/11
 Added MVC + parser and console reader
 
+https://github.com/TomaszRewak/C-sharp-console-gui-framework
