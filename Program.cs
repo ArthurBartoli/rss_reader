@@ -6,8 +6,8 @@ using Views;
 
 class Program {
     static void Main(string[] args) {
-        var feed_list = new FeedList();
-        var view = new ConsoleView();
+        FeedList feed_list = new FeedList();
+        ConsoleView view = new ConsoleView();
 
         string[] sample_feeds = new string[4] { 
             "https://www.feedforall.com/sample.xml", 
