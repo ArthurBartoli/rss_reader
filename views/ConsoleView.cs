@@ -1,5 +1,9 @@
 using Models;
 
+using ConsoleGUI;
+using ConsoleGUI.Controls;
+using ConsoleGUI.Space;
+
 namespace Views {
     internal class ConsoleView {
         public void DisplayArticle(Article article) {
@@ -10,5 +14,11 @@ namespace Views {
             Console.WriteLine("---------------------\n\n");
         }
 
+        public void InitUI()
+        {
+            ConsoleManager.Setup();
+            ConsoleManager.Resize(new Size(150, 40));
+            ConsoleManager.Content = new TextBlock { Text = "Hello world" };
+        }
     }
 }

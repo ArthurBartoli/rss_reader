@@ -1,5 +1,5 @@
-* [ ] Charger le feed X
-* [ ] Afficher le feed X
+* [x] Charger le feed X
+* [x] Afficher le feed X (compliqué à tester ça...)
 	* [ ] Afficher que certains articles (nécéssite une petite UX quand meme)
 * [ ] Faire un objet qui collectionne les feeds 
 * [ ] Ajouter des commandes
