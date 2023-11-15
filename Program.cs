@@ -7,11 +7,12 @@ using Views;
 class Program {
     static void Main(string[] args) {
         FeedList feed_list = new FeedList();
+        FeedList feed_list2 = new FeedList();
         ConsoleView view = new ConsoleView();
 
-        string[] sample_feeds = new string[4] { 
-            "https://www.feedforall.com/sample.xml", 
-            "https://www.feedforall.com/sample-feed.xml", 
+        string[] sample_feeds = new string[4] {
+            "https://www.feedforall.com/sample.xml",
+            "https://www.feedforall.com/sample-feed.xml",
             "https://www.feedforall.com/blog-feed.xml",
             "http://www.rss-specifications.com/blog-feed.xml"
         };
@@ -20,7 +21,9 @@ class Program {
 
         string full_path = Directory.GetCurrentDirectory() + "export.txt";
         feed_list.ExportList(full_path);
+        feed_list2.ImportList(full_path);
 
-        view.ListFeed(feed_list);   
+        Console.WriteLine("######");
+        view.ListFeed(feed_list2);
     }
 }
