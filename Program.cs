@@ -18,6 +18,9 @@ class Program {
 
         foreach (string feed in sample_feeds) { feed_list = RssReaderController.AddFeed(feed_list, feed); }
 
+        string full_path = Directory.GetCurrentDirectory() + "export.txt";
+        feed_list.ExportList(full_path);
+
         view.ListFeed(feed_list);   
     }
 }

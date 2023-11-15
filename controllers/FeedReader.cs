@@ -8,15 +8,20 @@ using System.Xml.Linq;
 
 namespace rss_reader.controllers
 {
-    internal class FeedReader
+    class FeedReader
     {
         private static async Task<string> GetFeedXml(string url)
         {
+            using var client = new HttpClient(); // to send query and read response
+            //  ÎÎÎÎÎ to free the instantiated object no matter the exit code (forces Dispose() method)
+            return await client.GetStringAsync(url); // await the http answer
+        }
+        private static XDocument ParseFeed(string url)
+        {
             try
             {
-                using var client = new HttpClient(); // to send query and read response
-                                                     //  ÎÎÎÎÎ to free the instantiated object no matter the exit code (forces Dispose() method)
-                return await client.GetStringAsync(url); // await the http answer
+                string xml = GetFeedXml(url).Result;
+                return XDocument.Parse(xml);
             }
             catch (Exception e)
             {
@@ -24,11 +29,6 @@ namespace rss_reader.controllers
                 Console.WriteLine(e.Message);
                 return null;
             }
-        }
-        private static XDocument ParseFeed(string url)
-        {
-            string xml = GetFeedXml(url).Result;
-            return XDocument.Parse(xml);
         }
         public static Feed ReadFeed(string url) 
         {

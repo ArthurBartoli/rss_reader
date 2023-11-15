@@ -15,17 +15,8 @@ namespace Controllers{
 
         public static FeedList AddFeed(FeedList feedList, string url) 
         {   
-            try
-            {
-                feedList.Feeds.Add(FeedReader.ReadFeed(url));
-                return feedList;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error while loading feed.");
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            feedList.Feeds.Add(FeedReader.ReadFeed(url));
+            return feedList;
         }
 
         public static void DisplayFeed(Feed feed)
