@@ -16,6 +16,7 @@ namespace rss_reader.models
             Feeds = new List<Feed>();
         }
 
+
         public void ExportList(string path)
         {
 
