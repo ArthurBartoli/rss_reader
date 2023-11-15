@@ -4,6 +4,7 @@ using ConsoleGUI;
 using ConsoleGUI.Controls;
 using ConsoleGUI.Space;
 using System.Xml.Linq;
+using rss_reader.models;
 
 namespace Views {
     internal class ConsoleView {
@@ -15,9 +16,11 @@ namespace Views {
             Console.WriteLine("---------------------\n\n");
         }
 
-        public void ListFeed(List<Feed> feed_list)
+        public void ListFeed(FeedList feed_list)
         {
-            foreach (Feed item in feed_list)
+            List<Feed> feeds = feed_list.Feeds;
+
+            foreach (Feed item in feeds)
             {
                 Console.WriteLine(item.Title + " - " + item.Link);
             }
