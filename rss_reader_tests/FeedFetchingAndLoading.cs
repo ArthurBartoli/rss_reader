@@ -1,5 +1,6 @@
 using Controllers;
 using Models;
+using rss_reader.models;
 using Views;
 
 namespace rss_reader_tests;
@@ -12,9 +13,11 @@ public class FeedFetchingAndLoading
         // AAA
         // Arrange
         var view = new ConsoleView();
+        var feed_list = new FeedList();
 
         // Act
-        Feed feed_test = RssReaderController.LoadFeed("https://www.feedforall.com/sample.xml");
+        feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
+        Feed feed_test = feed_list.Feeds.First();
 
         // Assert
         Assert.Equal("FeedForAll Sample Feed", feed_test.Title);
@@ -30,9 +33,11 @@ public class FeedFetchingAndLoading
         // AAA
         // Arrange
         var view = new ConsoleView();
+        var feed_list = new FeedList();
 
         // Act
-        Feed feed_test = RssReaderController.LoadFeed("https://www.feedforall.com/sample.xml");
+        feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
+        Feed feed_test = feed_list.Feeds.First();
         Article article_test = feed_test.Articles[0];
 
         // Assert

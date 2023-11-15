@@ -30,7 +30,7 @@ namespace rss_reader.controllers
             string xml = GetFeedXml(url).Result;
             return XDocument.Parse(xml);
         }
-        public static Feed ReadFeed(string url) // Async method to free thread at await
+        public static Feed ReadFeed(string url) 
         {
             try
             {
