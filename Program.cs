@@ -19,7 +19,8 @@ class Program {
 
         foreach (string feed in sample_feeds) { feed_list = RssReaderController.AddFeed(feed_list, feed); }
 
-        string full_path = Directory.GetCurrentDirectory() + "export.txt";
+        string full_path = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader\export");
+        Console.WriteLine(full_path);
         feed_list.ExportList(full_path);
         feed_list2.ImportList(full_path);
 
