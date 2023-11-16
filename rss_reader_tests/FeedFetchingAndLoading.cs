@@ -8,7 +8,7 @@ namespace rss_reader_tests;
 public class FeedFetchingAndLoading
 {
     [Fact]
-    public void RssReaderController_LoadFeed_FeedCorrectlyParsed()
+    public void RssReaderController_AddFeed_FeedCorrectlyParsed()
     {
         // AAA
         // Arrange
@@ -28,7 +28,7 @@ public class FeedFetchingAndLoading
     }
 
     [Fact]
-    public void RssReaderController_LoadFeed_ArticleCorrectlyParsed()
+    public void RssReaderController_AddFeed_ArticleCorrectlyParsed()
     {
         // AAA
         // Arrange

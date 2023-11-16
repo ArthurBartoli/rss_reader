@@ -16,11 +16,10 @@ public class FeedIO
         Console.WriteLine("We start testing IO");
         FeedList feed_list = new FeedList();
         Console.WriteLine(1);
-        string[] sample_feeds = new string[4] {
+        string[] sample_feeds = new string[3] {
             "https://www.feedforall.com/sample.xml",
             "https://www.feedforall.com/sample-feed.xml",
-            "https://www.feedforall.com/blog-feed.xml",
-            "http://www.rss-specifications.com/blog-feed.xml"
+            "https://www.feedforall.com/blog-feed.xml"
         };
 
         Console.WriteLine(2);
@@ -29,7 +28,7 @@ public class FeedIO
         string expected_export;
         using (StreamReader sr = new StreamReader(expected_export_path))
         {
-            expected_export = sr.ToString();
+            expected_export = sr.ReadToEnd();
         }
 
         Console.WriteLine(3);
@@ -43,7 +42,7 @@ public class FeedIO
         Console.WriteLine(6);
         using (StreamReader sr = new StreamReader(full_path))
         {
-            actual_export = sr.ToString();
+            actual_export = sr.ReadToEnd();
         }
         Console.WriteLine(7);
 
