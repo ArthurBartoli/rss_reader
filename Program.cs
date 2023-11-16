@@ -8,8 +8,7 @@ class Program {
     static void Main(string[] args) {
         FeedList feed_list = new FeedList();
         FeedList feed_list2 = new FeedList();
-        ConsoleView view = new ConsoleView();
 
-        view.TitleScreen();
+        ConsoleView.TitleScreen();
     }
 }

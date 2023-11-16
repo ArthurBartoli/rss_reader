@@ -7,9 +7,9 @@ using System.Xml.Linq;
 using rss_reader.models;
 
 namespace Views {
-    internal class ConsoleView {
+    static class ConsoleView {
 
-        public void TitleScreen()
+        public static void TitleScreen()
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.Write("  ____");
@@ -55,9 +55,16 @@ namespace Views {
             Console.Write("  |____/");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("    |_| \\_\\  \\___|  \\__,_|  \\__,_|  \\___| |_|\n");
+
+            int i = 0;
+            while (i < 10)
+            {
+                Console.WriteLine();
+                i++;
+            }
         }
 
-        public void DisplayArticle(Article article) {
+        public static void DisplayArticle(Article article) {
             Console.WriteLine($"* Titre: {article.Title}");
             Console.WriteLine($"* Content: {article.PubDate}");
             Console.WriteLine($"* Description: {article.Description}");
@@ -65,7 +72,7 @@ namespace Views {
             Console.WriteLine("---------------------\n\n");
         }
 
-        public void ListFeed(FeedList feed_list)
+        public static void ListFeed(FeedList feed_list)
         {
             List<Feed> feeds = feed_list.Feeds;
 
@@ -75,7 +82,7 @@ namespace Views {
             }
         }
 
-        public void InitUI()
+        public static void InitUI()
         {
             ConsoleManager.Setup();
             ConsoleManager.Resize(new Size(150, 40));

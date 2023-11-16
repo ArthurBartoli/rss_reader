@@ -20,13 +20,12 @@ namespace Controllers{
         }
 
         public static void DisplayFeed(Feed feed)
-        {
-            ConsoleView viewer = new ConsoleView();    
+        {   
             try
             {
                 foreach (Article item in feed.Articles)
                 {
-                    viewer.DisplayArticle(item);
+                    ConsoleView.DisplayArticle(item);
                 }
             }
             catch (Exception e)
