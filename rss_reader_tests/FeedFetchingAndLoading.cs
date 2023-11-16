@@ -8,19 +8,51 @@ namespace rss_reader_tests;
 public class FeedFetchingAndLoading
 {
     [Fact]
+    public void FeedList_ImportList_ImportIsCorrect()
+    {
+        // Arrange
+        var feedList = new FeedList();
+        string solution_dir = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader_tests");
+        string expected_export_path = Path.Combine(solution_dir, "export_test.txt");
+
+        // Act
+        feedList.ImportList(expected_export_path);
+        List<Feed> feeds = feedList.Feeds;
+
+        // Assert
+        // Asserting 1st RSS
+        Assert.Equal("FeedForAll Sample Feed", feeds[0].Title);
+        Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. " +
+            "Take a closer look at how various industries are using the benefits of RSS in their businesses.", feeds[0].Description);
+        Assert.Equal("Tue, 19 Oct 2004 13:39:14 -0400", feeds[0].LastBuildDate);
+        Assert.Equal("http://www.feedforall.com/industry-solutions.htm", feeds[0].Link);
+
+        // Asserting 2nd RSS
+        Assert.Equal("Sample Feed - Favorite RSS Related Software & Resources", feeds[1].Title);
+        Assert.Equal("Take a look at some of FeedForAll's favorite software and resources for learning more about RSS.", feeds[1].Description);
+        Assert.Equal("Mon, 1 Nov 2004 13:17:17 -0500", feeds[1].LastBuildDate);
+        Assert.Equal("http://www.feedforall.com", feeds[1].Link);
+
+        // Asserting 1st RSS
+        Assert.Equal("An RSS Daily News Feed from FeedForAll - RSS Feed Creation.", feeds[2].Title);
+        Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. " +
+            "Take a closer look at how various industries are using the benefits of RSS in their businesses. " +
+            "New information related to RSS feeds and using RSS for marketing is posted on a regular basis.", feeds[2].Description);
+        Assert.Equal("Mon, 15 Mar 2021 08:20:56 -0400", feeds[2].LastBuildDate);
+        Assert.Equal("http://www.feedforall.com/blog.htm", feeds[2].Link);
+    }
+
+    [Fact]
     public void FeedList_ExportList_ExportIsRightFormat()
     {
         // Arrange
-        Console.WriteLine("We start testing IO");
         FeedList feed_list = new FeedList();
-        Console.WriteLine(1);
         string[] sample_feeds = new string[3] {
             "https://www.feedforall.com/sample.xml",
             "https://www.feedforall.com/sample-feed.xml",
             "https://www.feedforall.com/blog-feed.xml"
         };
 
-        Console.WriteLine(2);
         string solution_dir = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader_tests");
         string expected_export_path = Path.Combine(solution_dir, "export_test.txt");
         string expected_export;
@@ -29,20 +61,15 @@ public class FeedFetchingAndLoading
             expected_export = sr.ReadToEnd();
         }
 
-        Console.WriteLine(3);
         // Act
         foreach (string feed in sample_feeds) { feed_list = RssReaderController.AddFeed(feed_list, feed); }
-        Console.WriteLine(4);
         string full_path = Path.Combine(solution_dir, "export.txt");
         string actual_export;
-        Console.WriteLine(5);
         feed_list.ExportList(full_path);
-        Console.WriteLine(6);
         using (StreamReader sr = new StreamReader(full_path))
         {
             actual_export = sr.ReadToEnd();
         }
-        Console.WriteLine(7);
 
         // Assess
         Assert.Equal(expected_export, actual_export);
