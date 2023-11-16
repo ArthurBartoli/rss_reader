@@ -62,7 +62,6 @@ namespace rss_reader.models
 
                 string import = importBuilder.ToString();
                 string[] feed_list = import.Split("####################");
-                int i = 0;
                 foreach (string feed in feed_list)
                 {
                     Feed tmp = new();

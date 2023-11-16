@@ -80,7 +80,6 @@ public class FeedFetchingAndLoading
     {
         // AAA
         // Arrange
-        var view = new ConsoleView();
         var feed_list = new FeedList();
 
         // Act
@@ -100,7 +99,6 @@ public class FeedFetchingAndLoading
     {
         // AAA
         // Arrange
-        var view = new ConsoleView();
         var feed_list = new FeedList();
 
         // Act
