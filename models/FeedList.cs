@@ -65,7 +65,7 @@ namespace rss_reader.models
                 int i = 0;
                 foreach (string feed in feed_list)
                 {
-                    Feed tmp = new Feed();
+                    Feed tmp = new();
                     string[] feed_items = feed.Split("||");
                     
                     tmp.Title = feed_items[0];
