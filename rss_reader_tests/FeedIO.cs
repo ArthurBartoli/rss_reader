@@ -35,17 +35,17 @@ public class FeedIO
         Console.WriteLine(3);
         // Act
         foreach (string feed in sample_feeds) { feed_list = RssReaderController.AddFeed(feed_list, feed); }
-        Console.WriteLine();
+        Console.WriteLine(4);
         string full_path = Path.Combine(solution_dir, "export.txt");
         string actual_export;
-        Console.WriteLine(4);
-        feed_list.ExportList(full_path);
         Console.WriteLine(5);
+        feed_list.ExportList(full_path);
+        Console.WriteLine(6);
         using (StreamReader sr = new StreamReader(full_path))
         {
             actual_export = sr.ToString();
         }
-        Console.WriteLine(6);
+        Console.WriteLine(7);
 
         // Assess
         Assert.Equal(expected_export, actual_export);
