@@ -8,6 +8,55 @@ using rss_reader.models;
 
 namespace Views {
     internal class ConsoleView {
+
+        public void TitleScreen()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("  ____");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("    ____");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("    ____");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("      ____                       _\n");
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(" |  _ \\");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("  / ___|");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("  / ___|");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("    |  _ \\    ___    __ _    __| |\n");
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(" | |_) |");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" \\___ \\");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("  \\___ \\");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("    | |_) |  / _ \\  / _` |  / _` |  / _ \\ | '__|\n");
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(" |  _ <");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("   ___) |");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("  ___) |");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("   |  _ <  |  __/ | (_| | | (_| | |  __/ | |\n");
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(" |_| \\_\\");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" |____/");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("  |____/");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("    |_| \\_\\  \\___|  \\__,_|  \\__,_|  \\___| |_|\n");
+        }
+
         public void DisplayArticle(Article article) {
             Console.WriteLine($"* Titre: {article.Title}");
             Console.WriteLine($"* Content: {article.PubDate}");

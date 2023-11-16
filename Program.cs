@@ -10,22 +10,6 @@ class Program {
         FeedList feed_list2 = new FeedList();
         ConsoleView view = new ConsoleView();
 
-        string[] sample_feeds = new string[4] {
-            "https://www.feedforall.com/sample.xml",
-            "https://www.feedforall.com/sample-feed.xml",
-            "https://www.feedforall.com/blog-feed.xml",
-            "http://www.rss-specifications.com/blog-feed.xml"
-        };
-
-        foreach (string feed in sample_feeds) { feed_list = RssReaderController.AddFeed(feed_list, feed); }
-
-        Console.WriteLine(Directory.GetCurrentDirectory());
-        string full_path = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader\export", "export.txt");
-        Console.WriteLine(full_path);
-        feed_list.ExportList(full_path);
-        feed_list2.ImportList(full_path);
-
-        Console.WriteLine("######");
-        view.ListFeed(feed_list2);
+        view.TitleScreen();
     }
 }
