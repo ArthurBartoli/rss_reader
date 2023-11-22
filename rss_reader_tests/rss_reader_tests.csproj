@@ -26,4 +26,8 @@
     <ProjectReference Include="..\rss_reader.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="no_export\" />
+  </ItemGroup>
+
 </Project>

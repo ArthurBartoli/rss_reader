@@ -8,12 +8,46 @@ namespace rss_reader_tests;
 public class FeedFetchingAndLoading
 {
     [Fact]
+    public void RssController_ListExports_NoExportDetected()
+    {
+        // Arrange
+        string solution_dir = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader_tests");
+        string export_dir = Path.Combine(solution_dir, "no_export");
+
+        // Act
+        Dictionary<String, String> export_list = RssReaderController.ListExports(export_dir);
+
+        // Assert
+        Assert.Equal("", export_list["No exports found."]);
+    }
+    [Fact]
+    public void RssController_ListExports_ListingIsCorrect()
+    {
+        // Arrange
+        string solution_dir = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader_tests");
+        string export_dir= Path.Combine(solution_dir, "export");
+        string test_export_path = Path.Combine(export_dir, "export_test.txt");
+        string normal_export_path = Path.Combine(export_dir, "export.txt");
+
+        // Act
+        Dictionary<String, String> export_list_tmp = RssReaderController.ListExports(export_dir);
+        Dictionary<String, String> export_list = export_list_tmp.Keys.OrderBy(k => k).ToDictionary(k => k, k => export_list_tmp[k]); // sorting
+        Console.WriteLine(export_list);
+
+        // Assert
+        // Asserting that path is good
+        Assert.Equal(test_export_path, export_list["export_test"]);
+        Assert.Equal(normal_export_path, export_list["export"]);
+        // If the keys were wrong, we wouldn't be able to query the path
+    }
+
+    [Fact]
     public void FeedList_ImportList_ImportIsCorrect()
     {
         // Arrange
-        var feedList = new FeedList();
+        FeedList feedList = new();
         string solution_dir = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader_tests");
-        string expected_export_path = Path.Combine(solution_dir, "export_test.txt");
+        string expected_export_path = Path.Combine(solution_dir, "export\\export_test.txt");
 
         // Act
         feedList.ImportList(expected_export_path);
@@ -54,16 +88,16 @@ public class FeedFetchingAndLoading
         };
 
         string solution_dir = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader_tests");
-        string expected_export_path = Path.Combine(solution_dir, "export_test.txt");
+        string expected_export_path = Path.Combine(solution_dir, "export\\export_test.txt");
         string expected_export;
-        using (StreamReader sr = new StreamReader(expected_export_path))
+        using (StreamReader sr = new(expected_export_path))
         {
             expected_export = sr.ReadToEnd();
         }
 
         // Act
         foreach (string feed in sample_feeds) { feed_list = RssReaderController.AddFeed(feed_list, feed); }
-        string full_path = Path.Combine(solution_dir, "export.txt");
+        string full_path = Path.Combine(solution_dir, "export\\export.txt");
         string actual_export;
         feed_list.ExportList(full_path);
         using (StreamReader sr = new StreamReader(full_path))
@@ -103,7 +137,7 @@ public class FeedFetchingAndLoading
 
         // Act
         feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
-        Feed feed_test = feed_list.Feeds.First();
+        Feed feed_test = feed_list.Feeds?.FirstOrDefault(); //TODO: les opérateurs qu'a montré Erwan
         Article article_test = feed_test.Articles[0];
 
         // Assert

@@ -14,11 +14,11 @@ namespace Controllers{
     class RssReaderController
     {
 
-        public static Dictionary<String, String> ListExports()
+        public static Dictionary<String, String> ListExports(string exportDirectory = null)
         {
             try
             {
-                string exportDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader\export\");
+                exportDirectory ??= Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader\export\");
                 string[] TXTFiles = Directory.GetFiles(exportDirectory, "*.txt");
                 if (TXTFiles.Length == 0)
                 {
