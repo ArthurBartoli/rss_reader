@@ -14,7 +14,7 @@ namespace Controllers{
     class RssReaderController
     {
 
-        public static string[] ListExports()
+        public static Dictionary<String, String> ListExports()
         {
             try
             {
@@ -22,11 +22,20 @@ namespace Controllers{
                 string[] TXTFiles = Directory.GetFiles(exportDirectory, "*.txt");
                 if (TXTFiles.Length == 0)
                 {
-                    string[] tmp = new string[1] { "No exports found." };
-                    return tmp;
+                    Dictionary<String, String> no_res = new Dictionary<String, String>()
+                    {
+                        { "No exports found.", "" }
+                    };
+                    return no_res;
                 }
 
-                return TXTFiles;
+                Dictionary<String, String> res = new Dictionary<String, String>();
+                // We create key-value pairs for better storage
+                foreach (string TXTFile in TXTFiles)
+                {
+                    res.Add(Path.GetFileNameWithoutExtension(TXTFile), TXTFile);
+                }
+                return res;
 
             }
             catch (Exception e)

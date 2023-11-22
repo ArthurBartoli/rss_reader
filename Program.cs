@@ -12,9 +12,9 @@ class Program {
 
         ConsoleView.TitleScreen();
         Console.WriteLine("Select one of the available feed list :");
-        foreach (var item in RssReaderController.ListExports())
+        foreach (KeyValuePair<string, string> item in RssReaderController.ListExports())
         {
-            Console.WriteLine("* " + Path.GetFileName(item));
+            Console.WriteLine("* " + Path.GetFileNameWithoutExtension(item.Key));
         }
         // GET LIST OF EXPORTS
     }
