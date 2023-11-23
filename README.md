@@ -3,13 +3,14 @@
 * [x] Faire un objet qui collectionne les feeds 
 * [x] Export/import 
 * [ ] Ajouter des commandes
-	* [ ] Attente de commande
-	* [ ] Lister les listes de feeds
-	* [ ] Importer une liste de feed
+	* [x] Attente de commande
+	* [x] Lister les listes de feeds
+	* [x] Importer une liste de feed
+	* [ ] Rajout dico Nom <> Object pour feedlist et feed
 	* [ ] Sélectionner un feed
 	* [ ] Lister les articles
 	* [ ] Lire un article
-* [ ] Ajouter de la navigation
+* [ ] Chores !
 * [ ] Ajouter des reglages
 * [ ] Enregistrer les reglages
 
