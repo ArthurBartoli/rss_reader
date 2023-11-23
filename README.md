@@ -7,8 +7,11 @@
 	* [x] Lister les listes de feeds
 	* [x] Importer une liste de feed
 	* [x] Rajout dico Nom <> Object pour feedlist et feed
+	* [x] Display all feeds, feed 
+	* [ ] Load articles when loading feed
+	* [ ] Anticiper des exceptions (feed pas trouvé, article pas trouvé, export pas trouvé...)
+	* [ ] Display article
 	* [ ] Sélectionner un feed
-	* [ ] Lister les articles
 	* [ ] Lire un article
 * [ ] Chores !
 * [ ] Ajouter des reglages

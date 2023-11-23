@@ -24,7 +24,7 @@ namespace Controllers{
 
                     while (true) // Command enclosure
                     {
-                        Console.WriteLine("Please enter a command (such as exports !)");
+                        Console.WriteLine("Please enter a command (such as list !)");
                         var input = Console.ReadLine();
                         List<string> command = input != null ? new List<string>(input.Split(" ")) : new List<string> { "main" };
 
@@ -43,8 +43,12 @@ namespace Controllers{
                                 Console.WriteLine("* exit --> Just exits the program");
                                 Console.WriteLine("* main --> Returns to main menu");
                                 Console.WriteLine("* load [export_name] --> Loads a feed list into the program");
-                                Console.WriteLine("Here is a list of available commands");
-                                goto default;
+                                Console.WriteLine("* display (feeds | feed [feed_name] | article [feed_name.article_name])" +
+                                    " --> Display feed info or the article of a specific feed");
+                                goto case "root pattern";
+                            case "root pattern":
+                                Console.WriteLine();
+                                break;
                             case "exit":
                                 return;
 
@@ -53,7 +57,7 @@ namespace Controllers{
                                 tmp.ImportList(export[command[1]]);
                                 Console.WriteLine("### Here is the list of feeds in this list :");
                                 ConsoleView.ListFeed(tmp);
-                                goto default;
+                                goto case "root pattern";
                                 
                             case "list":
                                 Dictionary<string, string> exports_list = RssReaderController.ListExports();
@@ -62,25 +66,46 @@ namespace Controllers{
                                 {
                                     Console.WriteLine("* " + exportsKey);
                                 }
-                                goto default;
+                                goto case "root pattern";
 
                             case "display":
-                            if ((tmp.Feeds != null) && (!tmp.Feeds.Any()))
+                                if (command.Count == 1) 
+                                { 
+                                    Console.WriteLine("Incorrect command. Type 'help' for syntax.");
+                                    goto case "root pattern";
+                                }
+                                if ((tmp.Feeds != null) && (!tmp.Feeds.Any()))
                                 {
                                     Console.WriteLine("No feeds have been loaded yet");
                                 }
-                            if (command[1] == "feeds") { ConsoleView.ListFeed(tmp); }
-                            //TODO: method to select a feed/article from list
-                            /*if (command[1] == "article")
+                                if (command[1] == "feeds") { ConsoleView.ListFeed(tmp); }
+                                if (command[1] == "feed")
+                                {
+                                    string command_end = string.Join(' ', command.Skip(2));
+                                    Feed targeted_feed = tmp.Feeds[command_end];
+                                    Console.WriteLine("####### " + targeted_feed.Title + " #######");
+                                    Console.WriteLine(targeted_feed.Description);
+                                    Console.WriteLine(" ---- " + targeted_feed.Link);
+                                    Console.WriteLine("* Category : " + targeted_feed.Category);
+                                    Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
+                                    Console.WriteLine("####### ARTICLES #######");
+                                    foreach (string article_title in targeted_feed.Articles.Keys)
+                                    {
+                                        Console.WriteLine(" * " + article_title);
+                                    }
+                                }
+                                if (command[1] == "article")
                                 {
                                     String[] target = command[2].Split(".");
-                                    Feed feed = tmp.Feeds[]
-                                }*/
-                            goto default;
+                                    Feed feed = tmp.Feeds[target[0]];
+                                    Article article = feed.Articles[target[1]];
+                                    ConsoleView.DisplayArticle(article);
+                                }
+                                goto case "root pattern";
 
                             default:
-                                Console.WriteLine();
-                                break;
+                                Console.WriteLine("The command was not understood, please enter another command.");
+                                goto case "root pattern";
                         }
                         
                     }
