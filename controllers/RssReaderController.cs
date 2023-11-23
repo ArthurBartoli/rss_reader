@@ -20,13 +20,16 @@ namespace Controllers{
                 while (true) // Main enclosure
                 {
                     ConsoleView.TitleScreen();
-                    // We ask for user's command
+                    FeedList tmp = new(); // One FeedList can be loaded per runtime
+
                     while (true) // Command enclosure
                     {
                         Console.WriteLine("Please enter a command (such as exports !)");
-                        string command = Console.ReadLine() ?? "main";
+                        var input = Console.ReadLine();
+                        List<string> command = input != null ? new List<string>(input.Split(" ")) : new List<string> { "main" };
+
                         Console.WriteLine("-----------------------------------------");
-                        switch(command)
+                        switch(command[0])
                         {
                             case "main":
                                 Console.Clear();
@@ -36,21 +39,31 @@ namespace Controllers{
                                 Console.WriteLine("Here is a list of available commands");
                                 Console.WriteLine("-----------------------------------------");
                                 Console.WriteLine("* help --> Lists all available commands :)");
-                                Console.WriteLine("* exports --> Lists all available exports");
+                                Console.WriteLine("* list --> Lists all available exports");
                                 Console.WriteLine("* exit --> Just exits the program");
                                 Console.WriteLine("* main --> Returns to main menu");
+                                Console.WriteLine("* load [export_name] --> Loads a feed list into the program");
                                 Console.WriteLine("Here is a list of available commands");
                                 goto default;
                             case "exit":
                                 return;
-                            case "exports":
-                                Dictionary<string, string> exports = RssReaderController.ListExports();
+
+                            case "load":
+                                Dictionary<string, string> export = RssReaderController.ListExports();
+                                tmp.ImportList(export[command[1]]);
+                                Console.WriteLine("### Here is the list of feeds in this list :");
+                                ConsoleView.ListFeed(tmp);
+                                goto default;
+                                
+                            case "list":
+                                Dictionary<string, string> exports_list = RssReaderController.ListExports();
                                 Console.WriteLine("Here are all available exports :");
-                                foreach (string exportsKey in exports.Keys)
+                                foreach (string exportsKey in exports_list.Keys)
                                 {
                                     Console.WriteLine("* " + exportsKey);
                                 }
                                 goto default;
+
                             default:
                                 Console.WriteLine();
                                 break;
