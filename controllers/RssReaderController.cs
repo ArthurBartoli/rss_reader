@@ -139,9 +139,9 @@ namespace Controllers{
         {   
             try
             {
-                foreach (Article item in feed.Articles)
+                foreach (string key in feed.Articles.Keys)
                 {
-                    ConsoleView.DisplayArticle(item);
+                    ConsoleView.DisplayArticle(feed.Articles[key]);
                 }
             }
             catch (Exception e)

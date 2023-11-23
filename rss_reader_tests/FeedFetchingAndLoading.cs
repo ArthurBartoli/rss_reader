@@ -148,7 +148,7 @@ public class FeedFetchingAndLoading
         // Act
         feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
         Feed feed_test = feed_list.Feeds["FeedForAll Sample Feed"]; //TODO: les opérateurs qu'a montré Erwan
-        Article article_test = feed_test.Articles[0];
+        Article article_test = feed_test.Articles["RSS Solutions for Restaurants"];
 
         // Assert
         Assert.Equal("RSS Solutions for Restaurants", article_test.Title);

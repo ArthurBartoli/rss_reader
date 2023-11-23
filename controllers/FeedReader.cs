@@ -51,7 +51,7 @@ namespace rss_reader.controllers
                     newArticle.PubDate = item.Element("pubDate")?.Value;
                     newArticle.Description = item.Element("description")?.Value;
 
-                    newFeed.Articles.Add(newArticle);
+                    newFeed.Articles[newArticle.Title] = (newArticle);
                 }
 
                 return newFeed;

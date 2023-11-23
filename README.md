@@ -6,7 +6,7 @@
 	* [x] Attente de commande
 	* [x] Lister les listes de feeds
 	* [x] Importer une liste de feed
-	* [ ] Rajout dico Nom <> Object pour feedlist et feed
+	* [x] Rajout dico Nom <> Object pour feedlist et feed
 	* [ ] Sélectionner un feed
 	* [ ] Lister les articles
 	* [ ] Lire un article

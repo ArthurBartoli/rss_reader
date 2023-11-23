@@ -5,11 +5,11 @@ namespace Models {
         public string Category { get; set; }
         public string LastBuildDate { get; set; }
         public string Link { get; set; }
-        public List<Article> Articles { get; set; }
+        public Dictionary<string, Article> Articles { get; set; }
 
         // Constructor initiates the list
         public Feed() {
-            Articles = new List<Article>();
+            Articles = new Dictionary<string, Article>();
         }
 
     }
