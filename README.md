@@ -1,9 +1,9 @@
-* [x] Charger le feed X
-* [x] Afficher le feed X (compliqué à tester ça...)
-	* [ ] Afficher que certains articles (nécéssite une petite UX quand meme)
+* [x] Charger le feed 
+* [x] Afficher le feed 
 * [x] Faire un objet qui collectionne les feeds 
 * [x] Export/import 
 * [ ] Ajouter des commandes
+	* [ ] Attente de commande
 	* [ ] Lister les listes de feeds
 	* [ ] Importer une liste de feed
 	* [ ] Sélectionner un feed
