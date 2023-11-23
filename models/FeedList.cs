@@ -7,13 +7,12 @@ namespace rss_reader.models
 {
     internal class FeedList
     {
-        public List<Feed>? Feeds { get; set; }
+        public Dictionary<string, Feed>? Feeds { get; set; }
 
-        public FeedList()
-        {
-            Feeds = new List<Feed>();
+        public FeedList() 
+        { 
+            Feeds = new Dictionary<string, Feed>();
         }
-
 
         public void ExportList(string path)
         {
@@ -27,13 +26,13 @@ namespace rss_reader.models
 
                 using (StreamWriter F = new StreamWriter(path))
                 {
-                    foreach (Feed item in Feeds)
+                    foreach (string item in Feeds.Keys)
                     {
                         F.WriteLine("####################");
-                        F.WriteLine(item.Title + "||");
-                        F.WriteLine(item.Description + "||");
-                        F.WriteLine(item.LastBuildDate + "||");
-                        F.WriteLine(item.Link);
+                        F.WriteLine(Feeds[item].Title + "||");
+                        F.WriteLine(Feeds[item].Description + "||");
+                        F.WriteLine(Feeds[item].LastBuildDate + "||");
+                        F.WriteLine(Feeds[item].Link);
                     }
                 }
             }
@@ -72,7 +71,7 @@ namespace rss_reader.models
                     tmp.LastBuildDate = feed_items[2];
                     tmp.Link = feed_items[3];
 
-                    Feeds.Add(tmp);
+                    Feeds[tmp.Title] = tmp;
                 }
             }
             catch (Exception ex)

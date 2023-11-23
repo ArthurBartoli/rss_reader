@@ -74,10 +74,11 @@ namespace Views {
 
         public static void ListFeed(FeedList feed_list)
         {
-            List<Feed> feeds = feed_list.Feeds;
+            Dictionary<string, Feed> feeds = feed_list.Feeds;
 
-            foreach (Feed item in feeds)
+            foreach (string key in feeds.Keys)
             {
+                Feed item = feeds[key];
                 Console.WriteLine(item.Title + " - " + item.Link);
             }
         }

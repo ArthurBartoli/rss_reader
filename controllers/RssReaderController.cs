@@ -128,9 +128,10 @@ namespace Controllers{
             }
         }
 
-        public static FeedList AddFeed(FeedList feedList, string url) 
-        {   
-            feedList.Feeds.Add(FeedReader.ReadFeed(url));
+        public static FeedList AddFeed(FeedList feedList, string url)
+        {
+            Feed newFeed = FeedReader.ReadFeed(url);
+            feedList.Feeds[newFeed.Title] = newFeed;
             return feedList;
         }
 

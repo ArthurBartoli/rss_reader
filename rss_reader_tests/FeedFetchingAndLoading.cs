@@ -1,4 +1,5 @@
 using Controllers;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.ObjectModel;
 using Models;
 using rss_reader.models;
 using Views;
@@ -51,29 +52,38 @@ public class FeedFetchingAndLoading
 
         // Act
         feedList.ImportList(expected_export_path);
-        List<Feed> feeds = feedList.Feeds;
+        Dictionary<string, Feed> feeds = feedList.Feeds;
 
         // Assert
         // Asserting 1st RSS
-        Assert.Equal("FeedForAll Sample Feed", feeds[0].Title);
-        Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. " +
-            "Take a closer look at how various industries are using the benefits of RSS in their businesses.", feeds[0].Description);
-        Assert.Equal("Tue, 19 Oct 2004 13:39:14 -0400", feeds[0].LastBuildDate);
-        Assert.Equal("http://www.feedforall.com/industry-solutions.htm", feeds[0].Link);
+        {
+            Feed tmp = feeds["FeedForAll Sample Feed"];
+            Assert.Equal("FeedForAll Sample Feed", tmp.Title);
+            Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. " +
+                "Take a closer look at how various industries are using the benefits of RSS in their businesses.", tmp.Description);
+            Assert.Equal("Tue, 19 Oct 2004 13:39:14 -0400", tmp.LastBuildDate);
+            Assert.Equal("http://www.feedforall.com/industry-solutions.htm", tmp.Link);
+        }
 
         // Asserting 2nd RSS
-        Assert.Equal("Sample Feed - Favorite RSS Related Software & Resources", feeds[1].Title);
-        Assert.Equal("Take a look at some of FeedForAll's favorite software and resources for learning more about RSS.", feeds[1].Description);
-        Assert.Equal("Mon, 1 Nov 2004 13:17:17 -0500", feeds[1].LastBuildDate);
-        Assert.Equal("http://www.feedforall.com", feeds[1].Link);
+        {
+            Feed tmp = feeds["Sample Feed - Favorite RSS Related Software & Resources"];
+            Assert.Equal("Sample Feed - Favorite RSS Related Software & Resources", tmp.Title);
+            Assert.Equal("Take a look at some of FeedForAll's favorite software and resources for learning more about RSS.", tmp.Description);
+            Assert.Equal("Mon, 1 Nov 2004 13:17:17 -0500", tmp.LastBuildDate);
+            Assert.Equal("http://www.feedforall.com", tmp.Link);
+        }
 
         // Asserting 1st RSS
-        Assert.Equal("An RSS Daily News Feed from FeedForAll - RSS Feed Creation.", feeds[2].Title);
-        Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. " +
-            "Take a closer look at how various industries are using the benefits of RSS in their businesses. " +
-            "New information related to RSS feeds and using RSS for marketing is posted on a regular basis.", feeds[2].Description);
-        Assert.Equal("Mon, 15 Mar 2021 08:20:56 -0400", feeds[2].LastBuildDate);
-        Assert.Equal("http://www.feedforall.com/blog.htm", feeds[2].Link);
+        {
+            Feed tmp = feeds["An RSS Daily News Feed from FeedForAll - RSS Feed Creation."];
+            Assert.Equal("An RSS Daily News Feed from FeedForAll - RSS Feed Creation.", tmp.Title);
+            Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. " +
+                "Take a closer look at how various industries are using the benefits of RSS in their businesses. " +
+                "New information related to RSS feeds and using RSS for marketing is posted on a regular basis.", tmp.Description);
+            Assert.Equal("Mon, 15 Mar 2021 08:20:56 -0400", tmp.LastBuildDate);
+            Assert.Equal("http://www.feedforall.com/blog.htm", tmp.Link);
+        }
     }
 
     [Fact]
@@ -118,7 +128,7 @@ public class FeedFetchingAndLoading
 
         // Act
         feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
-        Feed feed_test = feed_list.Feeds.First();
+        Feed feed_test = feed_list.Feeds["FeedForAll Sample Feed"];
 
         // Assert
         Assert.Equal("FeedForAll Sample Feed", feed_test.Title);
@@ -137,7 +147,7 @@ public class FeedFetchingAndLoading
 
         // Act
         feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
-        Feed feed_test = feed_list.Feeds?.FirstOrDefault(); //TODO: les opérateurs qu'a montré Erwan
+        Feed feed_test = feed_list.Feeds["FeedForAll Sample Feed"]; //TODO: les opérateurs qu'a montré Erwan
         Article article_test = feed_test.Articles[0];
 
         // Assert
