@@ -9,6 +9,7 @@
 	* [x] Rajout dico Nom <> Object pour feedlist et feed
 	* [x] Display all feeds, feed 
 	* [ ] Load articles when loading feed
+	* [ ] Refactoriser (notamment l'affichage des infos d'article/feed)
 	* [ ] Anticiper des exceptions (feed pas trouvé, article pas trouvé, export pas trouvé...)
 	* [ ] Display article
 	* [ ] Sélectionner un feed

@@ -1,4 +1,5 @@
 ﻿using Models;
+using rss_reader.controllers;
 using System.IO;
 using System.Reflection.PortableExecutable;
 using System.Text;
@@ -63,13 +64,10 @@ namespace rss_reader.models
                 string[] feed_list = import.Split("####################");
                 foreach (string feed in feed_list)
                 {
-                    Feed tmp = new();
                     string[] feed_items = feed.Split("||");
-                    
-                    tmp.Title = feed_items[0];
-                    tmp.Description = feed_items[1];
-                    tmp.LastBuildDate = feed_items[2];
-                    tmp.Link = feed_items[3];
+                    string url = feed_items[3];
+
+                    Feed tmp = FeedReader.ReadFeed(url);
 
                     Feeds[tmp.Title] = tmp;
                 }

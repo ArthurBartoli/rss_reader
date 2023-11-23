@@ -88,19 +88,19 @@ namespace Controllers{
                                     Console.WriteLine(" ---- " + targeted_feed.Link);
                                     Console.WriteLine("* Category : " + targeted_feed.Category);
                                     Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
-                                    Console.WriteLine("####### ARTICLES #######");
+                                    Console.WriteLine("####### ARTICLES");
                                     foreach (string article_title in targeted_feed.Articles.Keys)
                                     {
                                         Console.WriteLine(" * " + article_title);
                                     }
                                 }
-                                if (command[1] == "article")
+/*                                if (command[1] == "article")
                                 {
                                     String[] target = command[2].Split(".");
                                     Feed feed = tmp.Feeds[target[0]];
                                     Article article = feed.Articles[target[1]];
                                     ConsoleView.DisplayArticle(article);
-                                }
+                                }*/
                                 goto case "root pattern";
 
                             default:
