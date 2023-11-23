@@ -64,6 +64,20 @@ namespace Controllers{
                                 }
                                 goto default;
 
+                            case "display":
+                            if ((tmp.Feeds != null) && (!tmp.Feeds.Any()))
+                                {
+                                    Console.WriteLine("No feeds have been loaded yet");
+                                }
+                            if (command[1] == "feeds") { ConsoleView.ListFeed(tmp); }
+                            //TODO: method to select a feed/article from list
+                            /*if (command[1] == "article")
+                                {
+                                    String[] target = command[2].Split(".");
+                                    Feed feed = tmp.Feeds[]
+                                }*/
+                            goto default;
+
                             default:
                                 Console.WriteLine();
                                 break;
