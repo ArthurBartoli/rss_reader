@@ -1,9 +1,4 @@
 ﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace rss_reader.controllers
@@ -29,7 +24,7 @@ namespace rss_reader.controllers
                 return null;
             }
         }
-        public static Feed ReadFeed(string url) 
+        public static Feed ReadFeed(string url)
         {
             try
             {
@@ -42,16 +37,19 @@ namespace rss_reader.controllers
                 newFeed.Link = url;
                 newFeed.LastBuildDate = doc.Descendants("lastBuildDate").First().Value;
 
+                int i = 0;
+
                 foreach (XElement item in doc.Descendants("item"))
                 {
                     Article newArticle = new Article();
-                    
+
                     newArticle.Title = item.Element("title")?.Value;
                     newArticle.Link = item.Element("link")?.Value;
                     newArticle.PubDate = item.Element("pubDate")?.Value;
                     newArticle.Description = item.Element("description")?.Value;
 
-                    newFeed.Articles[newArticle.Title] = newArticle;
+                    newFeed.Articles[i.ToString()] = newArticle;
+                    i++;
                 }
 
                 return newFeed;

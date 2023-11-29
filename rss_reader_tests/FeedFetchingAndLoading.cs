@@ -2,6 +2,7 @@ using Controllers;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.ObjectModel;
 using Models;
 using rss_reader.models;
+using System.Runtime.InteropServices;
 using Views;
 
 namespace rss_reader_tests;
@@ -16,10 +17,10 @@ public class FeedFetchingAndLoading
         string export_dir = Path.Combine(solution_dir, "no_export");
 
         // Act
-        Dictionary<String, String> export_list = RssReaderController.ListExports(export_dir);
+        Dictionary<String, (string, string)> export_list = RssReaderController.ListExports(export_dir);
 
         // Assert
-        Assert.Equal("", export_list["No exports found."]);
+        Assert.Equal("", export_list["0"].Item2);
     }
     [Fact]
     public void RssController_ListExports_ListingIsCorrect()
@@ -31,14 +32,14 @@ public class FeedFetchingAndLoading
         string normal_export_path = Path.Combine(export_dir, "export.txt");
 
         // Act
-        Dictionary<String, String> export_list_tmp = RssReaderController.ListExports(export_dir);
-        Dictionary<String, String> export_list = export_list_tmp.Keys.OrderBy(k => k).ToDictionary(k => k, k => export_list_tmp[k]); // sorting
+        Dictionary<String, (string, string)> export_list_tmp = RssReaderController.ListExports(export_dir);
+        Dictionary<String, (string, string)> export_list = export_list_tmp.Keys.OrderBy(k => k).ToDictionary(k => k, k => export_list_tmp[k]); // sorting
         Console.WriteLine(export_list);
 
         // Assert
         // Asserting that path is good
-        Assert.Equal(test_export_path, export_list["export_test"]);
-        Assert.Equal(normal_export_path, export_list["export"]);
+        Assert.Equal(test_export_path, export_list["1"].Item2);
+        Assert.Equal(normal_export_path, export_list["0"].Item2);
         // If the keys were wrong, we wouldn't be able to query the path
     }
 
@@ -57,32 +58,32 @@ public class FeedFetchingAndLoading
         // Assert
         // Asserting 1st RSS
         {
-            Feed tmp = feeds["FeedForAll Sample Feed"];
+            Feed tmp = feeds["0"];
             Assert.Equal("FeedForAll Sample Feed", tmp.Title);
             Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. " +
                 "Take a closer look at how various industries are using the benefits of RSS in their businesses.", tmp.Description);
             Assert.Equal("Tue, 19 Oct 2004 13:39:14 -0400", tmp.LastBuildDate);
-            Assert.Equal("http://www.feedforall.com/industry-solutions.htm", tmp.Link);
+            Assert.Equal("https://www.feedforall.com/sample.xml", tmp.Link);
         }
 
         // Asserting 2nd RSS
         {
-            Feed tmp = feeds["Sample Feed - Favorite RSS Related Software & Resources"];
+            Feed tmp = feeds["1"];
             Assert.Equal("Sample Feed - Favorite RSS Related Software & Resources", tmp.Title);
             Assert.Equal("Take a look at some of FeedForAll's favorite software and resources for learning more about RSS.", tmp.Description);
             Assert.Equal("Mon, 1 Nov 2004 13:17:17 -0500", tmp.LastBuildDate);
-            Assert.Equal("http://www.feedforall.com", tmp.Link);
+            Assert.Equal("https://www.feedforall.com/sample-feed.xml", tmp.Link);
         }
 
         // Asserting 1st RSS
         {
-            Feed tmp = feeds["An RSS Daily News Feed from FeedForAll - RSS Feed Creation."];
+            Feed tmp = feeds["2"];
             Assert.Equal("An RSS Daily News Feed from FeedForAll - RSS Feed Creation.", tmp.Title);
             Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. " +
                 "Take a closer look at how various industries are using the benefits of RSS in their businesses. " +
                 "New information related to RSS feeds and using RSS for marketing is posted on a regular basis.", tmp.Description);
             Assert.Equal("Mon, 15 Mar 2021 08:20:56 -0400", tmp.LastBuildDate);
-            Assert.Equal("http://www.feedforall.com/blog.htm", tmp.Link);
+            Assert.Equal("https://www.feedforall.com/blog-feed.xml", tmp.Link);
         }
     }
 
@@ -128,13 +129,13 @@ public class FeedFetchingAndLoading
 
         // Act
         feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
-        Feed feed_test = feed_list.Feeds["FeedForAll Sample Feed"];
+        Feed feed_test = feed_list.Feeds["0"];
 
         // Assert
         Assert.Equal("FeedForAll Sample Feed", feed_test.Title);
         Assert.Equal("RSS is a fascinating technology. The uses for RSS are expanding daily. Take a closer look at how various industries are using the benefits of RSS in their businesses.", feed_test.Description);
         Assert.Equal("Computers/Software/Internet/Site Management/Content Management", feed_test.Category);
-        Assert.Equal("http://www.feedforall.com/industry-solutions.htm", feed_test.Link);
+        Assert.Equal("https://www.feedforall.com/sample.xml", feed_test.Link);
         Assert.Equal("Tue, 19 Oct 2004 13:39:14 -0400", feed_test.LastBuildDate);
     }
 
@@ -147,8 +148,9 @@ public class FeedFetchingAndLoading
 
         // Act
         feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
-        Feed feed_test = feed_list.Feeds["FeedForAll Sample Feed"]; //TODO: les opérateurs qu'a montré Erwan
-        Article article_test = feed_test.Articles["RSS Solutions for Restaurants"];
+        Console.WriteLine(feed_list.Feeds.Keys.ToArray());
+        Feed feed_test = feed_list.Feeds["0"]; //TODO: les opérateurs qu'a montré Erwan
+        Article article_test = feed_test.Articles["0"];
 
         // Assert
         Assert.Equal("RSS Solutions for Restaurants", article_test.Title);

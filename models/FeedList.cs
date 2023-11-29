@@ -1,7 +1,5 @@
 ﻿using Models;
 using rss_reader.controllers;
-using System.IO;
-using System.Reflection.PortableExecutable;
 using System.Text;
 
 namespace rss_reader.models
@@ -10,8 +8,8 @@ namespace rss_reader.models
     {
         public Dictionary<string, Feed>? Feeds { get; set; }
 
-        public FeedList() 
-        { 
+        public FeedList()
+        {
             Feeds = new Dictionary<string, Feed>();
         }
 
@@ -51,25 +49,24 @@ namespace rss_reader.models
                 using (StreamReader F = new StreamReader(path))
                 {
                     // We jump the first line to remove the first separator which separates nothing
-                    F.ReadLine(); 
+                    F.ReadLine();
 
                     string line;
-                    while ((line = F.ReadLine()) != null)
-                    {
-                        importBuilder.Append(line);
-                    }
+                    while ((line = F.ReadLine()) != null) { importBuilder.Append(line); }
                 }
 
                 string import = importBuilder.ToString();
                 string[] feed_list = import.Split("####################");
+                int i = 0;
+
                 foreach (string feed in feed_list)
                 {
                     string[] feed_items = feed.Split("||");
                     string url = feed_items[3];
 
                     Feed tmp = FeedReader.ReadFeed(url);
-
-                    Feeds[tmp.Title] = tmp;
+                    Feeds[i.ToString()] = tmp;
+                    i++;
                 }
             }
             catch (Exception ex)

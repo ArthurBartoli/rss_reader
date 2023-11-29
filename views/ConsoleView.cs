@@ -1,13 +1,13 @@
-using Models;
-
 using ConsoleGUI;
 using ConsoleGUI.Controls;
 using ConsoleGUI.Space;
-using System.Xml.Linq;
+using Models;
 using rss_reader.models;
 
-namespace Views {
-    static class ConsoleView {
+namespace Views
+{
+    static class ConsoleView
+    {
 
         public static void TitleScreen()
         {
@@ -64,7 +64,8 @@ namespace Views {
             }
         }
 
-        public static void DisplayArticle(Article article) {
+        public static void DisplayArticle(Article article)
+        {
             Console.WriteLine($"* Titre: {article.Title}");
             Console.WriteLine($"* Content: {article.PubDate}");
             Console.WriteLine($"* Description: {article.Description}");
@@ -79,7 +80,7 @@ namespace Views {
             foreach (string key in feeds.Keys)
             {
                 Feed item = feeds[key];
-                Console.WriteLine(item.Title + " - " + item.Link);
+                Console.WriteLine($" {key}: " + item.Link);
             }
         }
 

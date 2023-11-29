@@ -1,16 +1,10 @@
-using System.Reflection.Metadata;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using Models;
+using rss_reader.controllers;
 using rss_reader.models;
 using Views;
-using Controllers;
-using rss_reader.controllers;
-using System.IO;
 
-namespace Controllers{
+namespace Controllers
+{
     class RssReaderController
     {
         public static void MainMenu()
@@ -20,7 +14,7 @@ namespace Controllers{
                 while (true) // Main enclosure
                 {
                     ConsoleView.TitleScreen();
-                    FeedList tmp = new(); // One FeedList can be loaded per runtime
+                    FeedList tmp = new();
 
                     while (true) // Command enclosure
                     {
@@ -29,7 +23,7 @@ namespace Controllers{
                         List<string> command = input != null ? new List<string>(input.Split(" ")) : new List<string> { "main" };
 
                         Console.WriteLine("-----------------------------------------");
-                        switch(command[0])
+                        switch (command[0])
                         {
                             case "main":
                                 Console.Clear();
@@ -53,24 +47,24 @@ namespace Controllers{
                                 return;
 
                             case "load":
-                                Dictionary<string, string> export = RssReaderController.ListExports();
-                                tmp.ImportList(export[command[1]]);
+                                Dictionary<String, (string, string)> export = RssReaderController.ListExports();
+                                tmp.ImportList(export[command[1]].Item2);
                                 Console.WriteLine("### Here is the list of feeds in this list :");
                                 ConsoleView.ListFeed(tmp);
                                 goto case "root pattern";
-                                
+
                             case "list":
-                                Dictionary<string, string> exports_list = RssReaderController.ListExports();
+                                Dictionary<String, (string, string)> exports_list = RssReaderController.ListExports();
                                 Console.WriteLine("Here are all available exports :");
                                 foreach (string exportsKey in exports_list.Keys)
                                 {
-                                    Console.WriteLine("* " + exportsKey);
+                                    Console.WriteLine($" {exportsKey}: " + exports_list[exportsKey].Item1);
                                 }
                                 goto case "root pattern";
 
                             case "display":
-                                if (command.Count == 1) 
-                                { 
+                                if (command.Count == 1)
+                                {
                                     Console.WriteLine("Incorrect command. Type 'help' for syntax.");
                                     goto case "root pattern";
                                 }
@@ -94,20 +88,21 @@ namespace Controllers{
                                         Console.WriteLine(" * " + article_title);
                                     }
                                 }
-/*                                if (command[1] == "article")
-                                {
-                                    String[] target = command[2].Split(".");
-                                    Feed feed = tmp.Feeds[target[0]];
-                                    Article article = feed.Articles[target[1]];
-                                    ConsoleView.DisplayArticle(article);
-                                }*/
+                                //TODO: Select article
+                                /*                                if (command[1] == "article")
+                                                                {
+                                                                    String[] target = command[2].Split(".");
+                                                                    Feed feed = tmp.Feeds[target[0]];
+                                                                    Article article = feed.Articles[target[1]];
+                                                                    ConsoleView.DisplayArticle(article);
+                                                                }*/
                                 goto case "root pattern";
 
                             default:
                                 Console.WriteLine("The command was not understood, please enter another command.");
                                 goto case "root pattern";
                         }
-                        
+
                     }
                 }
 
@@ -121,7 +116,7 @@ namespace Controllers{
             }
         }
 
-        public static Dictionary<String, String> ListExports(string exportDirectory = null)
+        public static Dictionary<String, (string, string)> ListExports(string exportDirectory = null)
         {
             try
             {
@@ -129,18 +124,20 @@ namespace Controllers{
                 string[] TXTFiles = Directory.GetFiles(exportDirectory, "*.txt");
                 if (TXTFiles.Length == 0)
                 {
-                    Dictionary<String, String> no_res = new Dictionary<String, String>()
+                    Dictionary<String, (string, string)> no_res = new Dictionary<String, (string, string)>()
                     {
-                        { "No exports found.", "" }
+                        { "0",  ( "No exports found.", "" ) }
                     };
                     return no_res;
                 }
 
-                Dictionary<String, String> res = new Dictionary<String, String>();
+                Dictionary<String, (string, string)> res = new Dictionary<String, (string, string)>();
+                int i = 0;
                 // We create key-value pairs for better storage
                 foreach (string TXTFile in TXTFiles)
                 {
-                    res.Add(Path.GetFileNameWithoutExtension(TXTFile), TXTFile);
+                    res.Add(i.ToString(), ( Path.GetFileNameWithoutExtension(TXTFile), TXTFile ));
+                    i++;
                 }
                 return res;
 
@@ -156,12 +153,23 @@ namespace Controllers{
         public static FeedList AddFeed(FeedList feedList, string url)
         {
             Feed newFeed = FeedReader.ReadFeed(url);
-            feedList.Feeds[newFeed.Title] = newFeed;
+            if (feedList.Feeds.Count() == 0)
+            {
+                feedList.Feeds["0"] = newFeed;
+                return feedList;
+            }
+
+            int maxIndex = feedList.Feeds.Keys
+                .Select(key => int.Parse(key))
+                .Max();
+
+            feedList.Feeds[(maxIndex + 1).ToString()] = newFeed;
+
             return feedList;
         }
 
         public static void DisplayFeed(Feed feed)
-        {   
+        {
             try
             {
                 foreach (string key in feed.Articles.Keys)

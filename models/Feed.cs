@@ -1,5 +1,7 @@
-namespace Models {
-    class Feed {
+namespace Models
+{
+    class Feed
+    {
         public string Title { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
@@ -8,7 +10,8 @@ namespace Models {
         public Dictionary<string, Article> Articles { get; set; }
 
         // Constructor initiates the list
-        public Feed() {
+        public Feed()
+        {
             Articles = new Dictionary<string, Article>();
         }
 

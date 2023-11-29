@@ -8,13 +8,19 @@
 	* [x] Importer une liste de feed
 	* [x] Rajout dico Nom <> Object pour feedlist et feed
 	* [x] Display all feeds, feed 
-	* [ ] Load articles when loading feed
-	* [ ] Refactoriser (notamment l'affichage des infos d'article/feed)
-	* [ ] Anticiper des exceptions (feed pas trouvé, article pas trouvé, export pas trouvé...)
+	* [x] Load articles when loading feed
+	* [ ] Add more practical selection with numbers (for exports too !)
+	* [ ] Numbers as int not strings
+	* [ ] More guidance for the display command
+	* [ ] Better help command
+	* [ ] Typing aid (e.g. "did you mean... ?")
+	* [ ] Command factorisation
 	* [ ] Display article
 	* [ ] Sélectionner un feed
 	* [ ] Lire un article
 * [ ] Chores !
+	* [ ] Refactoriser (notamment l'affichage des infos d'article/feed)
+	* [ ] Anticiper des exceptions (feed pas trouvé, article pas trouvé, export pas trouvé...)
 * [ ] Ajouter des reglages
 * [ ] Enregistrer les reglages
 
