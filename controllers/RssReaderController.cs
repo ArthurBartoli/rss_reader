@@ -1,6 +1,7 @@
 using Models;
 using rss_reader.controllers;
 using rss_reader.models;
+using System.Runtime.InteropServices;
 using Views;
 
 namespace Controllers
@@ -63,39 +64,7 @@ namespace Controllers
                                 goto case "root pattern";
 
                             case "display":
-                                if (command.Count == 1)
-                                {
-                                    Console.WriteLine("Incorrect command. Type 'help' for syntax.");
-                                    goto case "root pattern";
-                                }
-                                if ((tmp.Feeds != null) && (!tmp.Feeds.Any()))
-                                {
-                                    Console.WriteLine("No feeds have been loaded yet");
-                                }
-                                if (command[1] == "feeds") { ConsoleView.ListFeed(tmp); }
-                                if (command[1] == "feed")
-                                {
-                                    string command_end = string.Join(' ', command.Skip(2));
-                                    Feed targeted_feed = tmp.Feeds[command_end];
-                                    Console.WriteLine("####### " + targeted_feed.Title + " #######");
-                                    Console.WriteLine(targeted_feed.Description);
-                                    Console.WriteLine(" ---- " + targeted_feed.Link);
-                                    Console.WriteLine("* Category : " + targeted_feed.Category);
-                                    Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
-                                    Console.WriteLine("####### ARTICLES");
-                                    foreach (string article_title in targeted_feed.Articles.Keys)
-                                    {
-                                        Console.WriteLine(" * " + article_title);
-                                    }
-                                }
-                                //TODO: Select article
-                                /*                                if (command[1] == "article")
-                                                                {
-                                                                    String[] target = command[2].Split(".");
-                                                                    Feed feed = tmp.Feeds[target[0]];
-                                                                    Article article = feed.Articles[target[1]];
-                                                                    ConsoleView.DisplayArticle(article);
-                                                                }*/
+                                RssReaderController.Command_Display(command, tmp);
                                 goto case "root pattern";
 
                             default:
@@ -114,6 +83,70 @@ namespace Controllers
                 Console.WriteLine(e.Message);
 
             }
+        }
+
+        public static void Command_Display(List<string> command, FeedList tmp)
+        {
+            if (command.Count == 1)
+            {
+                Console.WriteLine("You did not specify whether you want to display ! Type 'help' for some help on that.");
+                return;
+            }
+            if ((tmp.Feeds != null) && (!tmp.Feeds.Any()))
+            {
+                Console.WriteLine("No feeds have been loaded yet");
+            }
+            switch (command[1])
+            {
+                case "feeds":
+                    ConsoleView.ListFeed(tmp);
+                    goto default;
+                case "feed":
+                    string command_end = string.Join(' ', command.Skip(2));
+                    if (command_end == null) {
+                        Console.WriteLine("You did not select a feed. Please type 'display feeds' and select a feed to display.");
+                        goto default;
+                    }
+                    Feed targeted_feed = tmp.Feeds[command_end];
+                    Console.WriteLine("####### " + targeted_feed.Title + " #######");
+                    Console.WriteLine(targeted_feed.Description);
+                    Console.WriteLine(" ---- " + targeted_feed.Link);
+                    Console.WriteLine("* Category : " + targeted_feed.Category);
+                    Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
+                    Console.WriteLine("####### ARTICLES");
+                    foreach (string article_title in targeted_feed.Articles.Keys)
+                    {
+                        Console.WriteLine(" * " + article_title);
+                    }
+                    goto default;
+                default:
+                    break;
+            }
+            
+            if (command[1] == "feeds") {  }
+            if (command[1] == "feed")
+            {
+                string command_end = string.Join(' ', command.Skip(2));
+                Feed targeted_feed = tmp.Feeds[command_end];
+                Console.WriteLine("####### " + targeted_feed.Title + " #######");
+                Console.WriteLine(targeted_feed.Description);
+                Console.WriteLine(" ---- " + targeted_feed.Link);
+                Console.WriteLine("* Category : " + targeted_feed.Category);
+                Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
+                Console.WriteLine("####### ARTICLES");
+                foreach (string article_title in targeted_feed.Articles.Keys)
+                {
+                    Console.WriteLine(" * " + article_title);
+                }
+            }
+            //TODO: Select article
+            /*                                if (command[1] == "article")
+                                            {
+                                                String[] target = command[2].Split(".");
+                                                Feed feed = tmp.Feeds[target[0]];
+                                                Article article = feed.Articles[target[1]];
+                                                ConsoleView.DisplayArticle(article);
+                                            }*/
         }
 
         public static Dictionary<String, (string, string)> ListExports(string exportDirectory = null)

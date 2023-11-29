@@ -9,7 +9,7 @@
 	* [x] Rajout dico Nom <> Object pour feedlist et feed
 	* [x] Display all feeds, feed 
 	* [x] Load articles when loading feed
-	* [ ] Add more practical selection with numbers (for exports too !)
+	* [x] Add more practical selection with numbers (for exports too !)
 	* [ ] Numbers as int not strings
 	* [ ] More guidance for the display command
 	* [ ] Better help command
