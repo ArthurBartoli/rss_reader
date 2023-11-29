@@ -105,36 +105,40 @@ namespace Controllers
                         ConsoleView.ListFeed(tmp);
                         goto default;
                     case "feed":
-                        string command_end = string.Join(' ', command.Skip(2));
-                        if (command_end == null)
+                        string command_end_feed = string.Join(' ', command.Skip(2));
+                        if (command_end_feed == null)
                         {
                             Console.WriteLine("You did not select a feed. Please type 'display feeds' and select a feed to display.");
                             goto default;
                         }
-                        Feed targeted_feed = tmp.Feeds[command_end];
+                        Feed targeted_feed = tmp.Feeds[command_end_feed];
                         Console.WriteLine("####### " + targeted_feed.Title + " #######");
                         Console.WriteLine(targeted_feed.Description);
                         Console.WriteLine(" ---- " + targeted_feed.Link);
                         Console.WriteLine("* Category : " + targeted_feed.Category);
                         Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
                         Console.WriteLine("####### ARTICLES");
-                        foreach (string article_title in targeted_feed.Articles.Keys)
+                        foreach (string k in targeted_feed.Articles.Keys)
                         {
-                            Console.WriteLine(" * " + article_title);
+                            Console.WriteLine($"  * {k}: " + targeted_feed.Articles[k].Title);
                         }
+                        goto default;
+                    case "article":
+                        string command_end_article = string.Join(' ', command.Skip(2));
+                        if (command_end_article == null)
+                        {
+                            Console.WriteLine("You did not select a feed. Please type 'display feeds' and select a feed to display.");
+                            goto default;
+                        }
+                        String[] target = command_end_article.Split(".");
+                        Feed feed = tmp.Feeds[target[0]];
+                        Article article = feed.Articles[target[1]];
+                        ConsoleView.DisplayArticle(article);
                         goto default;
                     default:
                         break;
                 }
 
-                //TODO: Select article
-                /*                                if (command[1] == "article")
-                                                {
-                                                    String[] target = command[2].Split(".");
-                                                    Feed feed = tmp.Feeds[target[0]];
-                                                    Article article = feed.Articles[target[1]];
-                                                    ConsoleView.DisplayArticle(article);
-                                                }*/
             }
             catch (Exception e)
             {
