@@ -23,7 +23,7 @@ namespace Controllers
                         var input = Console.ReadLine();
                         List<string> command = input != null ? new List<string>(input.Split(" ")) : new List<string> { "main" };
 
-                        Console.WriteLine("-----------------------------------------");
+                        Console.WriteLine("=========================================");
                         switch (command[0])
                         {
                             case "main":
@@ -87,9 +87,10 @@ namespace Controllers
 
         public static void Command_Display(List<string> command, FeedList tmp)
         {
-            if (command.Count == 1)
+            var possible_commands = new string[3] { "feed", "feeds", "article" };
+            if (command.Count == 1 || !possible_commands.Contains(command[1]) )
             {
-                Console.WriteLine("You did not specify whether you want to display ! Type 'help' for some help on that.");
+                Console.WriteLine("You did not specify what you want to display ! Type 'help' for some help on that.");
                 return;
             }
             if ((tmp.Feeds != null) && (!tmp.Feeds.Any()))

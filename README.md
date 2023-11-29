@@ -10,8 +10,9 @@
 	* [x] Display all feeds, feed 
 	* [x] Load articles when loading feed
 	* [x] Add more practical selection with numbers (for exports too !)
-	* [ ] Numbers as int not strings
+	* [//] Numbers as int not strings // CANCELED - more problems than solutions
 	* [ ] More guidance for the display command
+	* [ ] Handle bad selection of display command
 	* [ ] Better help command
 	* [ ] Typing aid (e.g. "did you mean... ?")
 	* [ ] Command factorisation
