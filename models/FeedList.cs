@@ -35,9 +35,10 @@ namespace rss_reader.models
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine("Erreur lors de l'exportation : " + ex.Message);
+                Console.WriteLine(" !!!!!! Error while importing Feed List");
+                Console.WriteLine(" !!!!!! " + e.Message);
             }
         }
 

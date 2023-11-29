@@ -19,8 +19,8 @@ namespace rss_reader.controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error while parsing the feed.");
-                Console.WriteLine(e.Message);
+                Console.WriteLine(" !!!!!! Error while parsing the feed.");
+                Console.WriteLine(" !!!!!! " + e.Message);
                 return null;
             }
         }
@@ -56,8 +56,8 @@ namespace rss_reader.controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error while loading feed.");
-                Console.WriteLine(e.Message);
+                Console.WriteLine(" !!!!!! Error while loading feed.");
+                Console.WriteLine(" !!!!!! " + e.Message);
                 return null;
             }
         }
