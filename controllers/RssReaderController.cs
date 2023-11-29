@@ -127,22 +127,6 @@ namespace Controllers
                         break;
                 }
 
-                if (command[1] == "feeds") { }
-                if (command[1] == "feed")
-                {
-                    string command_end = string.Join(' ', command.Skip(2));
-                    Feed targeted_feed = tmp.Feeds[command_end];
-                    Console.WriteLine("####### " + targeted_feed.Title + " #######");
-                    Console.WriteLine(targeted_feed.Description);
-                    Console.WriteLine(" ---- " + targeted_feed.Link);
-                    Console.WriteLine("* Category : " + targeted_feed.Category);
-                    Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
-                    Console.WriteLine("####### ARTICLES");
-                    foreach (string article_title in targeted_feed.Articles.Keys)
-                    {
-                        Console.WriteLine(" * " + article_title);
-                    }
-                }
                 //TODO: Select article
                 /*                                if (command[1] == "article")
                                                 {
