@@ -12,8 +12,8 @@
 	* [x] Add more practical selection with numbers (for exports too !)
 	* [//] Numbers as int not strings // CANCELED - more problems than solutions
 	* [x] More guidance for the display command
-	* [ ] Handle bad selection of display command
-	* [ ] Better help command
+	* [x] Handle bad selection of display command
+	* [x] Better help command
 	* [ ] Typing aid (e.g. "did you mean... ?")
 	* [ ] Command factorisation
 	* [ ] Display article
