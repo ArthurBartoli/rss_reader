@@ -1,0 +1,2 @@
+Loads an export into the program by selecting it using the selection index. To consult the selection indices, please use the 'list' command. 
+For example: 'load 3' will load the 3rd export listed by the 'list' command.

@@ -83,7 +83,7 @@ namespace Controllers
         {
             List<string> COMMAND_LIST = new()
                 {
-                    "list", "exit", "main", "load", "display"
+                    "list", "exit", "main", "load", "display", "help"
                 };
             string SOLUTION_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader");
             string HELP_DIR = Path.Combine(SOLUTION_DIR, "help");
