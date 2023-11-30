@@ -118,7 +118,7 @@ namespace Controllers
             }
         }
 
-        public static void Command_Display(List<string> command, FeedList tmp)
+        static void Command_Display(List<string> command, FeedList tmp)
         {
             try
             {
