@@ -37,6 +37,8 @@ namespace Controllers
                             case "root pattern":
                                 Console.WriteLine();
                                 break;
+                            case "quit":
+                                goto case "exit";
                             case "exit":
                                 return;
 
@@ -81,40 +83,48 @@ namespace Controllers
         // COMMAND METHODS BELOW
         static void Command_Help(List<string> command)
         {
-            List<string> COMMAND_LIST = new()
-                {
-                    "list", "exit", "main", "load", "display", "help"
-                };
-            string SOLUTION_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader");
-            string HELP_DIR = Path.Combine(SOLUTION_DIR, "help");
+            try
+            {
+                List<string> COMMAND_LIST = new()
+                    {
+                        "list", "exit", "main", "load", "display", "help"
+                    };
+                string SOLUTION_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader");
+                string HELP_DIR = Path.Combine(SOLUTION_DIR, "help");
 
-            if (command.Count == 1)
-            {
-                Console.WriteLine("Here is a list of available commands");
-                Console.WriteLine("-----------------------------------------");
-                Console.WriteLine("* help [command]--> Lists all available commands or gives a detailed help");
-                Console.WriteLine("* list --> Lists all available exports");
-                Console.WriteLine("* exit --> Just exits the program");
-                Console.WriteLine("* main --> Returns to main menu");
-                Console.WriteLine("* load [export_id] --> Loads a feed list into the program");
-                Console.WriteLine("* display (feeds | feed [feed_id] | article [feed_id.article_id])" +
-                    " --> Display feed info or the article of a specific feed");
-                return;
-            }
-            if (COMMAND_LIST.Contains(command[1]))
-            {
-                string path_help_file = Path.Combine(HELP_DIR, command[1]+".txt");
-                using (StreamReader F = new(path_help_file))
+                if (command.Count == 1)
                 {
-                    string content = F.ReadToEnd();
-                    Console.WriteLine(content);
+                    Console.WriteLine("Here is a list of available commands");
+                    Console.WriteLine("-----------------------------------------");
+                    Console.WriteLine("* help [command]--> Lists all available commands or gives a detailed help");
+                    Console.WriteLine("* list --> Lists all available exports");
+                    Console.WriteLine("* exit --> Just exits the program");
+                    Console.WriteLine("* main --> Returns to main menu");
+                    Console.WriteLine("* load [export_id] --> Loads a feed list into the program");
+                    Console.WriteLine("* display (feeds | feed [feed_id] | article [feed_id.article_id])" +
+                        " --> Display feed info or the article of a specific feed");
+                    return;
                 }
-                return;
+                if (COMMAND_LIST.Contains(command[1]))
+                {
+                    string path_help_file = Path.Combine(HELP_DIR, command[1] + ".txt");
+                    using (StreamReader F = new(path_help_file))
+                    {
+                        string content = F.ReadToEnd();
+                        Console.WriteLine(content);
+                    }
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Command was not recognized. Please enter 'help' followed by the command or just 'help'");
+                    return;
+                }
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("Command was not recognized. Please enter 'help' followed by the command or just 'help'");
-                return;
+                Console.WriteLine(" !!!!!! Error while getting help");
+                Console.WriteLine(" !!!!!! " + e.Message);
             }
         }
 
