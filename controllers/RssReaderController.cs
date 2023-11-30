@@ -4,6 +4,7 @@ using rss_reader.models;
 using System.IO;
 using System.Runtime.InteropServices;
 using Views;
+using Toolbox;
 
 namespace Controllers
 {
@@ -63,7 +64,9 @@ namespace Controllers
                                 goto case "root pattern";
 
                             default:
+                                string guessed_command = RssReaderController.Command_Guess(command[0]);
                                 Console.WriteLine("The command was not understood, please enter another command.");
+                                Console.WriteLine($"Did you mean {guessed_command} ?");
                                 goto case "root pattern";
                         }
 
@@ -74,20 +77,53 @@ namespace Controllers
 
             catch (Exception e)
             {
-                Console.WriteLine(" !!!!!! Error while listing existing exports");
+                Console.WriteLine(" !!!!!! Error while browsing the main menu");
                 Console.WriteLine(" !!!!!! " + e.Message);
 
             }
         }
 
         // COMMAND METHODS BELOW
+        static string Command_Guess(string command)
+        {
+            try
+            {
+                List<string> COMMAND_LIST = new()
+                        {
+                            "list", "exit", "main", "load", "display", "help", "quit"
+                        };
+                Dictionary<float, string> distances = new();
+                foreach (string item in COMMAND_LIST)
+                {
+                    float distance = LevenshteinDistance.Calculate(command, item);
+                    distances[distance] = item;
+                    /* FYI
+                    Given the commands "list", "exit", "main", "load", "display", "help", "quit" and 
+                    an input between 1 and 10 characters, there is a 5.04 x 10^-21 probability of
+                    hash collapse.
+                    This probability falls with more (diverse) commands/more characters in the input.
+                    */
+                }
+                float min_distance = distances.Keys.Min();
+                string res = distances[min_distance];
+
+                return res;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(" !!!!!! Error during command guessing assistance");
+                Console.WriteLine(" !!!!!! " + e.Message);
+
+                return null;
+            }
+        }
         static void Command_Help(List<string> command)
         {
             try
             {
                 List<string> COMMAND_LIST = new()
                     {
-                        "list", "exit", "main", "load", "display", "help"
+                        "list", "exit", "main", "load", "display", "help", "quit"
                     };
                 string SOLUTION_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader");
                 string HELP_DIR = Path.Combine(SOLUTION_DIR, "help");
