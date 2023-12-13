@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rss_reader", "rss_reader.cs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rss_reader_tests", "rss_reader_tests\rss_reader_tests.csproj", "{D88456CE-0D75-477C-BB2D-57AF68005FA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rss_reader_gui", "rss_reader_gui\rss_reader_gui.csproj", "{AF9905B4-A1FD-47CA-83B7-542288806CA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D88456CE-0D75-477C-BB2D-57AF68005FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D88456CE-0D75-477C-BB2D-57AF68005FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D88456CE-0D75-477C-BB2D-57AF68005FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF9905B4-A1FD-47CA-83B7-542288806CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF9905B4-A1FD-47CA-83B7-542288806CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF9905B4-A1FD-47CA-83B7-542288806CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF9905B4-A1FD-47CA-83B7-542288806CA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
