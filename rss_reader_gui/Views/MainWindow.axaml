@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:rss_reader_gui.ViewModels"
+		xmlns:views ="clr-namespace:rss_reader_gui.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
@@ -16,17 +17,42 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	<TextBlock 
-		HorizontalAlignment="Center" 
-		VerticalAlignment="Center" 
+	<Grid>
+		<!-- Overlay -->
+		
+
+		<views:SideMenu Name="SideMenu" HorizontalAlignment="Left" Width="0" ZIndex="2"/>
+
+		<Button Name="HamburgerButton"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				Click="HamburgerButton_Click"
+				ZIndex="2">
+			<TextBlock Text="&#x2630;" FontSize="24"/>
+		</Button>
+
+		<Border Name="Overlay"
+				Background="#AA000000"
+				IsVisible="False"
+				ZIndex="1"
+				PointerPressed="Overlay_Click">
+		</Border>
+		
+		<TextBlock
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
 		TextWrapping="Wrap"
 		
 		FontFamily="Tahoma"
 		FontSize="40"
 		FontWeight="UltraBold"
 		>
-		<Run Foreground="Gold">RS</Run><Run Foreground="Orange">S Re</Run><Run Foreground="Tomato">ader</Run>
-	</TextBlock>
+			<Run Foreground="Gold">RS</Run><Run Foreground="Orange">S Re</Run><Run Foreground="Tomato">ader</Run>
+		</TextBlock>
+	
+	</Grid>	
+	
+	
 
 	
 
