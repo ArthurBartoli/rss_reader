@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="768"
 		x:Class="rss_reader_gui.Views.SideMenu"
         x:DataType="vm:MainWindowViewModel"
-		Background="Wheat">
+		Background="Ivory">
 
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,23 +15,26 @@
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
 
-	<Grid>
-		<TextBlock 
-			HorizontalAlignment="Center" 
-			VerticalAlignment="Top"
-			Margin="50">
-			Hello
+	<StackPanel Margin="0 30">
+		<TextBlock
+		HorizontalAlignment="Center"
+		
+		
+		FontFamily="Tahoma"
+		FontSize="15"
+		FontWeight="UltraBold"
+		>
+			<Run Foreground="Gold">RS</Run><Run Foreground="Orange">S Re</Run><Run Foreground="Tomato">ader</Run>
 		</TextBlock>
-		<TextBlock 
-			Text="-"
-			HorizontalAlignment="Center"
-			VerticalAlignment="Top"
-			Margin="60"/>
+		
+		<Canvas 
+			Width="100" Height="1" 
+		Background="#FFEEDE"/>
 
 
 
 
-	</Grid>
+	</StackPanel>
 
 
 

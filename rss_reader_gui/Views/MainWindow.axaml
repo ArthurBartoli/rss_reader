@@ -39,17 +39,7 @@
 				PointerPressed="Overlay_Click">
 		</Border>
 		
-		<TextBlock
-		HorizontalAlignment="Center"
-		VerticalAlignment="Center"
-		TextWrapping="Wrap"
 		
-		FontFamily="Tahoma"
-		FontSize="40"
-		FontWeight="UltraBold"
-		>
-			<Run Foreground="Gold">RS</Run><Run Foreground="Orange">S Re</Run><Run Foreground="Tomato">ader</Run>
-		</TextBlock>
 	
 	</Grid>	
 	
