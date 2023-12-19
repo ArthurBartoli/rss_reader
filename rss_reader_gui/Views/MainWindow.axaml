@@ -9,7 +9,8 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="\Assets\Papirus-Team-Papirus-Devices-Cpu.ico"
         Title="RSS READER"
-		Background="Ivory">
+		Background="Ivory"
+		KeyDown="OnKeyDown">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,

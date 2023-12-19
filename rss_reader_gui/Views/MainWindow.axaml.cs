@@ -13,7 +13,19 @@ namespace rss_reader_gui.Views
             InitializeComponent();
         }
 
+        public void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftCtrl) 
+            {
+                ToggleSideMenu();
+            }
+        }
         public void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleSideMenu();
+        }
+
+        private void ToggleSideMenu()
         {
             var isMenuOpen = SideMenu.Width > 0;        // If the menu is opened
             SideMenu.Width = isMenuOpen ? 0 : 200;      // close it, else open it
@@ -22,8 +34,8 @@ namespace rss_reader_gui.Views
 
         public void Overlay_Click(object sender, PointerPressedEventArgs e)
         {
-            SideMenu.Width = 0;          // close the side menu
-            Overlay.IsVisible= false;    // lift overlay
+            SideMenu.Width = 0;         // close the side menu
+            Overlay.IsVisible = false;  // lift overlay
         }
     }
 }
