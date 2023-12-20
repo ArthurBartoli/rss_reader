@@ -73,7 +73,7 @@ namespace Views
             Console.WriteLine("---------------------\n\n");
         }
 
-        public static void ListFeed(FeedList feed_list)
+        public static void DisplayFeeds(FeedList feed_list)
         {
             Dictionary<string, Feed> feeds = feed_list.Feeds;
 
@@ -81,6 +81,14 @@ namespace Views
             {
                 Feed item = feeds[key];
                 Console.WriteLine($" {key}: " + item.Link);
+            }
+        }
+
+        public static void DisplayFeed(Feed feed)
+        {
+            foreach (string key in feed.Articles.Keys)
+            {
+                ConsoleView.DisplayArticle(feed.Articles[key]);
             }
         }
 

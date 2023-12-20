@@ -16,7 +16,7 @@ class Program
             "https://www.feedforall.com/blog-feed.xml"
         };
 
-        foreach (string feed in sample_feeds) { feed_list = RssReaderController.AddFeed(feed_list, feed); }
+        foreach (string feed in sample_feeds) { feed_list.AddFeed(feed); }
         string actual_export;
         feed_list.ExportList(EXPORT_DIR);
 

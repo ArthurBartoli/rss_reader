@@ -44,14 +44,14 @@ namespace Controllers
                                 return;
 
                             case "load":
-                                Dictionary<String, (string, string)> export = RssReaderController.ListExports();
+                                Dictionary<String, (string, string)> export = RSSDataManagement.ListExports();
                                 tmp.ImportList(export[command[1]].Item2);
                                 Console.WriteLine("### Here is the list of feeds in this list :");
-                                ConsoleView.ListFeed(tmp);
+                                ConsoleView.DisplayFeeds(tmp);
                                 goto case "root pattern";
 
                             case "list":
-                                Dictionary<String, (string, string)> exports_list = RssReaderController.ListExports();
+                                Dictionary<String, (string, string)> exports_list = RSSDataManagement.ListExports();
                                 Console.WriteLine("Here are all available exports :");
                                 foreach (string exportsKey in exports_list.Keys)
                                 {
@@ -181,7 +181,7 @@ namespace Controllers
                 switch (command[1])
                 {
                     case "feeds":
-                        ConsoleView.ListFeed(tmp);
+                        ConsoleView.DisplayFeeds(tmp);
                         goto default;
                     case "feed":
                         string command_end_feed = string.Join(' ', command.Skip(2));
@@ -222,74 +222,6 @@ namespace Controllers
             catch (Exception e)
             {
                 Console.WriteLine(" !!!!!! Error while displaying RSS feed/article");
-                Console.WriteLine(" !!!!!! " + e.Message);
-            }
-        }
-
-        public static Dictionary<String, (string, string)> ListExports(string exportDirectory = null)
-        {
-            try
-            {
-                exportDirectory ??= Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader\export\");
-                string[] TXTFiles = Directory.GetFiles(exportDirectory, "*.txt");
-                if (TXTFiles.Length == 0)
-                {
-                    Dictionary<String, (string, string)> no_res = new Dictionary<String, (string, string)>()
-                    {
-                        { "0",  ( "No exports found.", "" ) }
-                    };
-                    return no_res;
-                }
-
-                Dictionary<String, (string, string)> res = new Dictionary<String, (string, string)>();
-                int i = 0;
-                // We create key-value pairs for better storage
-                foreach (string TXTFile in TXTFiles)
-                {
-                    res.Add(i.ToString(), ( Path.GetFileNameWithoutExtension(TXTFile), TXTFile ));
-                    i++;
-                }
-                return res;
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(" !!!!!! Error while listing existing exports");
-                Console.WriteLine(" !!!!!! " + e.Message);
-                return null;
-            }
-        }
-
-        public static FeedList AddFeed(FeedList feedList, string url)
-        {
-            Feed newFeed = FeedReader.ReadFeed(url);
-            if (feedList.Feeds.Count() == 0)
-            {
-                feedList.Feeds["0"] = newFeed;
-                return feedList;
-            }
-
-            int maxIndex = feedList.Feeds.Keys
-                .Select(key => int.Parse(key))
-                .Max();
-
-            feedList.Feeds[(maxIndex + 1).ToString()] = newFeed;
-
-            return feedList;
-        }
-
-        public static void DisplayFeed(Feed feed)
-        {
-            try
-            {
-                foreach (string key in feed.Articles.Keys)
-                {
-                    ConsoleView.DisplayArticle(feed.Articles[key]);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(" !!!!!! Error while displaying feed");
                 Console.WriteLine(" !!!!!! " + e.Message);
             }
         }

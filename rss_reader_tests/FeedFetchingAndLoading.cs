@@ -17,7 +17,7 @@ public class FeedFetchingAndLoading
         string export_dir = Path.Combine(solution_dir, "no_export");
 
         // Act
-        Dictionary<String, (string, string)> export_list = RssReaderController.ListExports(export_dir);
+        Dictionary<String, (string, string)> export_list = RSSDataManagement.ListExports(export_dir);
 
         // Assert
         Assert.Equal("", export_list["0"].Item2);
@@ -32,7 +32,7 @@ public class FeedFetchingAndLoading
         string normal_export_path = Path.Combine(export_dir, "export.txt");
 
         // Act
-        Dictionary<String, (string, string)> export_list_tmp = RssReaderController.ListExports(export_dir);
+        Dictionary<String, (string, string)> export_list_tmp = RSSDataManagement.ListExports(export_dir);
         Dictionary<String, (string, string)> export_list = export_list_tmp.Keys.OrderBy(k => k).ToDictionary(k => k, k => export_list_tmp[k]); // sorting
         Console.WriteLine(export_list);
 
@@ -107,7 +107,7 @@ public class FeedFetchingAndLoading
         }
 
         // Act
-        foreach (string feed in sample_feeds) { feed_list = RssReaderController.AddFeed(feed_list, feed); }
+        foreach (string feed in sample_feeds) { feed_list.AddFeed(feed); }
         string full_path = Path.Combine(solution_dir, "export\\export.txt");
         string actual_export;
         feed_list.ExportList(full_path);
@@ -128,7 +128,7 @@ public class FeedFetchingAndLoading
         var feed_list = new FeedList();
 
         // Act
-        feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
+        feed_list.AddFeed("https://www.feedforall.com/sample.xml");
         Feed feed_test = feed_list.Feeds["0"];
 
         // Assert
@@ -147,7 +147,7 @@ public class FeedFetchingAndLoading
         var feed_list = new FeedList();
 
         // Act
-        feed_list = RssReaderController.AddFeed(feed_list, "https://www.feedforall.com/sample.xml");
+        feed_list.AddFeed("https://www.feedforall.com/sample.xml");
         Console.WriteLine(feed_list.Feeds.Keys.ToArray());
         Feed feed_test = feed_list.Feeds["0"]; //TODO: les opérateurs qu'a montré Erwan
         Article article_test = feed_test.Articles["0"];

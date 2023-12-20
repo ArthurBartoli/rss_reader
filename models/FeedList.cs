@@ -13,6 +13,22 @@ namespace rss_reader.models
             Feeds = new Dictionary<string, Feed>();
         }
 
+        public void AddFeed(string url)
+        {
+            Feed newFeed = FeedReader.ReadFeed(url);
+            if (this.Feeds.Count() == 0)
+            {
+                this.Feeds["0"] = newFeed;
+                return;
+            }
+
+            int maxIndex = this.Feeds.Keys
+                .Select(key => int.Parse(key))
+                .Max();
+
+            this.Feeds[(maxIndex + 1).ToString()] = newFeed;
+        }
+
         public void ExportList(string path)
         {
             try
