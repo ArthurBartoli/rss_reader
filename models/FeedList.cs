@@ -1,4 +1,5 @@
 ﻿using rss_reader.controllers;
+using rss_reader.toolbox;
 using System.Text;
 
 namespace rss_reader.models
@@ -15,7 +16,7 @@ namespace rss_reader.models
         public void AddFeed(string url)
         {
             Feed newFeed = FeedReader.ReadFeed(url)
-                ?? throw new ArgumentNullException("Feed is null, something wrong happened");
+                ?? throw new NullException("Feed is null, something wrong happened");
             if (Feeds.Count == 0)
             {
                 Feeds["0"] = newFeed;
@@ -82,7 +83,7 @@ namespace rss_reader.models
                     string url = feed_items[3];
 
                     Feed tmp = FeedReader.ReadFeed(url)
-                        ?? throw new ArgumentNullException("Feed is null, something wrong happened");
+                        ?? throw new NullException();
                     Feeds[i.ToString()] = tmp;
                     i++;
                 }

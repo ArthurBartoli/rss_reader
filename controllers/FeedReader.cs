@@ -1,6 +1,6 @@
 ﻿using rss_reader.models;
+using rss_reader.toolbox;
 using System.Xml.Linq;
-using Xunit.Sdk;
 
 namespace rss_reader.controllers
 {
@@ -29,7 +29,7 @@ namespace rss_reader.controllers
         {
             try
             {
-                XDocument doc = ParseFeed(url) ?? throw new ArgumentException("Feed has not been read correctly.");
+                XDocument doc = ParseFeed(url) ?? throw new NullException("Feed has not been read correctly.");
                 Feed newFeed = new(
                     doc.Descendants("title").First().Value,
                     doc.Descendants("description").First().Value,
