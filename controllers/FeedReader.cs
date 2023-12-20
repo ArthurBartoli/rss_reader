@@ -24,7 +24,7 @@ namespace rss_reader.controllers
                 return null;
             }
         }
-        public static Feed ReadFeed(string url)
+        public static Feed? ReadFeed(string url)
         {
             try
             {
@@ -41,13 +41,12 @@ namespace rss_reader.controllers
 
                 foreach (XElement item in doc.Descendants("item"))
                 {
-                    Article newArticle = new Article();
-
-                    newArticle.Title = item.Element("title")?.Value;
-                    newArticle.Link = item.Element("link")?.Value;
-                    newArticle.PubDate = item.Element("pubDate")?.Value;
-                    newArticle.Description = item.Element("description")?.Value;
-
+                    Article newArticle = new Article(
+                        item.Element("title")?.Value,
+                        item.Element("link")?.Value,
+                        item.Element("pubDate")?.Value,
+                        item.Element("description")?.Value
+                        );
                     newFeed.Articles[i.ToString()] = newArticle;
                     i++;
                 }
