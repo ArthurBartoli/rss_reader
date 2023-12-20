@@ -2,7 +2,7 @@
 {
     static public class RSSDataManagement
     {
-        public static Dictionary<String, (string, string)> ListExports(string exportDirectory = null)
+        public static Dictionary<String, (string, string)> ListExports(string exportDirectory = "")
         {
             try
             {

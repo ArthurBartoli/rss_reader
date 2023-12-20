@@ -10,7 +10,7 @@ namespace rss_reader.controllers
             using var client = new HttpClient(); // to send query and read response
             return await client.GetStringAsync(url); // await the http answer
         }
-        private static XDocument ParseFeed(string url)
+        private static XDocument? ParseFeed(string url)
         {
             try
             {

@@ -16,7 +16,6 @@ class Program
         };
 
         foreach (string feed in sample_feeds) { feed_list.AddFeed(feed); }
-        string actual_export;
         feed_list.ExportList(EXPORT_DIR);
 
 

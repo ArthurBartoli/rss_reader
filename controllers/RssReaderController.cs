@@ -110,7 +110,7 @@ namespace rss_reader.controllers
                 Console.WriteLine(" !!!!!! Error during command guessing assistance");
                 Console.WriteLine(" !!!!!! " + e.Message);
 
-                return null;
+                return " !!!!!! " + e.Message;
             }
         }
         static void Command_Help(List<string> command)
@@ -170,7 +170,7 @@ namespace rss_reader.controllers
                     Console.WriteLine("You did not specify what you want to display ! Type 'help' for some help on that.");
                     return;
                 }
-                if ((tmp.Feeds != null) && (!tmp.Feeds.Any()))
+                if ((tmp.Feeds is not null) && (!tmp.Feeds.Any()))
                 {
                     Console.WriteLine("No feeds have been loaded yet");
                 }
@@ -181,22 +181,21 @@ namespace rss_reader.controllers
                         goto default;
                     case "feed":
                         string command_end_feed = string.Join(' ', command.Skip(2));
-                        if (command_end_feed == null)
-                        {
-                            Console.WriteLine("You did not select a feed. Please type 'display feeds' and select a feed to display.");
-                            goto default;
+                        if (command_end_feed is not null && tmp.Feeds is not null)
+                        { 
+                            Feed targeted_feed = tmp.Feeds[command_end_feed];
+                            Console.WriteLine("####### " + targeted_feed.Title + " #######");
+                            Console.WriteLine(targeted_feed.Description);
+                            Console.WriteLine(" ---- " + targeted_feed.Link);
+                            Console.WriteLine("* Category : " + targeted_feed.Category);
+                            Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
+                            Console.WriteLine("####### ARTICLES");
+                            foreach (string k in targeted_feed.Articles.Keys)
+                            {
+                                Console.WriteLine($"  * {k}: " + targeted_feed.Articles[k].Title);
+                            }
                         }
-                        Feed targeted_feed = tmp.Feeds[command_end_feed];
-                        Console.WriteLine("####### " + targeted_feed.Title + " #######");
-                        Console.WriteLine(targeted_feed.Description);
-                        Console.WriteLine(" ---- " + targeted_feed.Link);
-                        Console.WriteLine("* Category : " + targeted_feed.Category);
-                        Console.WriteLine("* Last Build Date : " + targeted_feed.LastBuildDate);
-                        Console.WriteLine("####### ARTICLES");
-                        foreach (string k in targeted_feed.Articles.Keys)
-                        {
-                            Console.WriteLine($"  * {k}: " + targeted_feed.Articles[k].Title);
-                        }
+                        else { Console.WriteLine("You did not select a feed. Please type 'display feeds' and select a feed to display."); }
                         goto default;
                     case "article":
                         string command_end_article = string.Join(' ', command.Skip(2));
