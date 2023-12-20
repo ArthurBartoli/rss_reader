@@ -1,5 +1,6 @@
 ﻿using rss_reader.models;
 using System.Xml.Linq;
+using Xunit.Sdk;
 
 namespace rss_reader.controllers
 {
@@ -28,24 +29,23 @@ namespace rss_reader.controllers
         {
             try
             {
-                XDocument doc = ParseFeed(url);
-                Feed newFeed = new Feed();
-
-                newFeed.Title = doc.Descendants("title").First().Value;
-                newFeed.Description = doc.Descendants("description").First().Value;
-                newFeed.Category = doc.Descendants("category").First().Value;
-                newFeed.Link = url;
-                newFeed.LastBuildDate = doc.Descendants("lastBuildDate").First().Value;
+                XDocument doc = ParseFeed(url) ?? throw new ArgumentException("Feed has not been read correctly.");
+                Feed newFeed = new(
+                    doc.Descendants("title").First().Value,
+                    doc.Descendants("description").First().Value,
+                    doc.Descendants("category").First().Value,
+                    url,
+                    doc.Descendants("lastBuildDate").First().Value);
 
                 int i = 0;
 
                 foreach (XElement item in doc.Descendants("item"))
                 {
-                    Article newArticle = new Article(
-                        item.Element("title")?.Value,
-                        item.Element("link")?.Value,
-                        item.Element("pubDate")?.Value,
-                        item.Element("description")?.Value
+                    Article newArticle = new(
+                        item.Element("title")?.Value!, // if the doc is not null, a null title/link would be surprising
+                        item.Element("link")?.Value!,
+                        item.Element("pubDate")?.Value!,
+                        item.Element("description")?.Value!
                         );
                     newFeed.Articles[i.ToString()] = newArticle;
                     i++;

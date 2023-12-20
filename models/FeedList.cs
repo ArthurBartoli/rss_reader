@@ -5,7 +5,7 @@ namespace rss_reader.models
 {
     internal class FeedList
     {
-        public Dictionary<string, Feed>? Feeds { get; set; }
+        public Dictionary<string, Feed> Feeds { get; set; }
 
         public FeedList()
         {
@@ -14,8 +14,9 @@ namespace rss_reader.models
 
         public void AddFeed(string url)
         {
-            Feed newFeed = FeedReader.ReadFeed(url);
-            if (this.Feeds.Count() == 0)
+            Feed newFeed = FeedReader.ReadFeed(url)
+                ?? throw new ArgumentNullException("Feed is null, something wrong happened");
+            if (Feeds.Count == 0)
             {
                 this.Feeds["0"] = newFeed;
                 return;
@@ -61,8 +62,8 @@ namespace rss_reader.models
         {
             try
             {
-                StringBuilder importBuilder = new StringBuilder();
-                using (StreamReader F = new StreamReader(path))
+                StringBuilder importBuilder = new();
+                using (StreamReader F = new(path))
                 {
                     // We jump the first line to remove the first separator which separates nothing
                     F.ReadLine();
@@ -80,7 +81,8 @@ namespace rss_reader.models
                     string[] feed_items = feed.Split("||");
                     string url = feed_items[3];
 
-                    Feed tmp = FeedReader.ReadFeed(url);
+                    Feed tmp = FeedReader.ReadFeed(url)
+                        ?? throw new ArgumentNullException("Feed is null, something wrong happened");
                     Feeds[i.ToString()] = tmp;
                     i++;
                 }

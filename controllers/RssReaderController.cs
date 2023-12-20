@@ -170,7 +170,9 @@ namespace rss_reader.controllers
                     Console.WriteLine("You did not specify what you want to display ! Type 'help' for some help on that.");
                     return;
                 }
-                if ((tmp.Feeds is not null) && (!tmp.Feeds.Any()))
+
+                Dictionary<string, Feed> feeds = tmp.Feeds!; // The constructor should guarantee that the Feeds exists
+                if (feeds is not null && (!feeds.Any()))
                 {
                     Console.WriteLine("No feeds have been loaded yet");
                 }
@@ -181,9 +183,9 @@ namespace rss_reader.controllers
                         goto default;
                     case "feed":
                         string command_end_feed = string.Join(' ', command.Skip(2));
-                        if (command_end_feed is not null && tmp.Feeds is not null)
+                        if (command_end_feed is not null && feeds is not null)
                         { 
-                            Feed targeted_feed = tmp.Feeds[command_end_feed];
+                            Feed targeted_feed = feeds[command_end_feed];
                             Console.WriteLine("####### " + targeted_feed.Title + " #######");
                             Console.WriteLine(targeted_feed.Description);
                             Console.WriteLine(" ---- " + targeted_feed.Link);
@@ -205,7 +207,7 @@ namespace rss_reader.controllers
                             goto default;
                         }
                         String[] target = command_end_article.Split(".");
-                        Feed feed = tmp.Feeds[target[0]];
+                        Feed feed = feeds![target[0]]; // I don't get why feeds could be null, I guarantee it's not 2 times
                         Article article = feed.Articles[target[1]];
                         ConsoleView.DisplayArticle(article);
                         goto default;

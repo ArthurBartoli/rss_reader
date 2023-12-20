@@ -32,7 +32,11 @@
             {
                 Console.WriteLine(" !!!!!! Error while listing existing exports");
                 Console.WriteLine(" !!!!!! " + e.Message);
-                return null;
+                Dictionary<String, (string, string)> no_res = new Dictionary<String, (string, string)>()
+                    {
+                        { "0",  ( "No exports found.", "" ) }
+                    };
+                return no_res;
             }
         }
     }

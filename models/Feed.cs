@@ -10,9 +10,14 @@ class Feed
     public Dictionary<string, Article> Articles { get; set; }
 
     // Constructor initiates the list
-    public Feed()
+    public Feed(string title, string description, string category, string lastbuilddate, string link)
     {
         Articles = new Dictionary<string, Article>();
+        Title = title;
+        Category = category;
+        Description = description;
+        LastBuildDate = lastbuilddate;
+        Link = link;
     }
 
 }
