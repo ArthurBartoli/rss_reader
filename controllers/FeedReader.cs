@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using rss_reader.models;
 using System.Xml.Linq;
 
 namespace rss_reader.controllers

@@ -1,6 +1,5 @@
-﻿using Controllers;
-using rss_reader.models;
-
+﻿using rss_reader.models;
+using rss_reader.controllers;
 
 class Program
 {

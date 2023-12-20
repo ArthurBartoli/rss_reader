@@ -1,12 +1,8 @@
-using Models;
-using rss_reader.controllers;
 using rss_reader.models;
-using System.IO;
-using System.Runtime.InteropServices;
-using Views;
-using Toolbox;
+using rss_reader.views;
+using rss_reader.toolbox;
 
-namespace Controllers
+namespace rss_reader.controllers
 {
     class RssReaderController
     {

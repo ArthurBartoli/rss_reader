@@ -1,10 +1,9 @@
 using ConsoleGUI;
 using ConsoleGUI.Controls;
 using ConsoleGUI.Space;
-using Models;
 using rss_reader.models;
 
-namespace Views
+namespace rss_reader.views
 {
     static class ConsoleView
     {

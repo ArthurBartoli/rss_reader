@@ -1,9 +1,6 @@
-using Controllers;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.ObjectModel;
-using Models;
+using rss_reader.controllers;
 using rss_reader.models;
-using System.Runtime.InteropServices;
-using Views;
+using rss_reader.views;
 
 namespace rss_reader_tests;
 

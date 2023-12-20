@@ -1,4 +1,4 @@
-namespace Models {
+namespace rss_reader.models {
     class Article {
         public string Title { get; set; }
         public string Link { get; set; }

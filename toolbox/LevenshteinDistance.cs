@@ -2,7 +2,7 @@
 
 // Courtesy of Davidblkx - https://gist.github.com/Davidblkx/e12ab0bb2aff7fd8072632b396538560
 
-namespace Toolbox
+namespace rss_reader.toolbox
 {
     public static class LevenshteinDistance
     {
