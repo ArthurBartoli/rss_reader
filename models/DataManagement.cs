@@ -10,14 +10,14 @@
                 string[] TXTFiles = Directory.GetFiles(exportDirectory, "*.txt");
                 if (TXTFiles.Length == 0)
                 {
-                    Dictionary<String, (string, string)> no_res = new Dictionary<String, (string, string)>()
+                    Dictionary<String, (string, string)> no_res = new()
                     {
                         { "0",  ( "No exports found.", "" ) }
                     };
                     return no_res;
                 }
 
-                Dictionary<String, (string, string)> res = new Dictionary<String, (string, string)>();
+                Dictionary<String, (string, string)> res = new();
                 int i = 0;
                 // We create key-value pairs for better storage
                 foreach (string TXTFile in TXTFiles)
@@ -32,7 +32,7 @@
             {
                 Console.WriteLine(" !!!!!! Error while listing existing exports");
                 Console.WriteLine(" !!!!!! " + e.Message);
-                Dictionary<String, (string, string)> no_res = new Dictionary<String, (string, string)>()
+                Dictionary<String, (string, string)> no_res = new()
                     {
                         { "0",  ( "No exports found.", "" ) }
                     };

@@ -34,8 +34,8 @@ namespace rss_reader.controllers
                     doc.Descendants("title").First().Value,
                     doc.Descendants("description").First().Value,
                     doc.Descendants("category").First().Value,
-                    url,
-                    doc.Descendants("lastBuildDate").First().Value);
+                    doc.Descendants("lastBuildDate").First().Value,
+                    url);
 
                 int i = 0;
 

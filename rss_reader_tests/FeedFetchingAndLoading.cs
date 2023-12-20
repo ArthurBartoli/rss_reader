@@ -86,7 +86,7 @@ public class FeedFetchingAndLoading
     public void FeedList_ExportList_ExportIsRightFormat()
     {
         // Arrange
-        FeedList feed_list = new FeedList();
+        FeedList feed_list = new();
         string[] sample_feeds = new string[3] {
             "https://www.feedforall.com/sample.xml",
             "https://www.feedforall.com/sample-feed.xml",
@@ -106,7 +106,7 @@ public class FeedFetchingAndLoading
         string full_path = Path.Combine(solution_dir, "export\\export.txt");
         string actual_export;
         feed_list.ExportList(full_path);
-        using (StreamReader sr = new StreamReader(full_path))
+        using (StreamReader sr = new(full_path))
         {
             actual_export = sr.ReadToEnd();
         }

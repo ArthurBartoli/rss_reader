@@ -18,7 +18,7 @@ namespace rss_reader.models
                 ?? throw new ArgumentNullException("Feed is null, something wrong happened");
             if (Feeds.Count == 0)
             {
-                this.Feeds["0"] = newFeed;
+                Feeds["0"] = newFeed;
                 return;
             }
 
@@ -26,7 +26,7 @@ namespace rss_reader.models
                 .Select(key => int.Parse(key))
                 .Max();
 
-            this.Feeds[(maxIndex + 1).ToString()] = newFeed;
+            Feeds[(maxIndex + 1).ToString()] = newFeed;
         }
 
         public void ExportList(string path)
