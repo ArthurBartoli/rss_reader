@@ -1,7 +1,5 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Interactivity;
-using System;
-using System.Diagnostics;
+using rss_reader_gui.ViewModels;
 
 namespace rss_reader_gui.Views
 {
@@ -10,6 +8,7 @@ namespace rss_reader_gui.Views
         public SideMenu()
         {
             InitializeComponent();
+            DataContext = new SideMenuViewModel();
         }
     }
 }

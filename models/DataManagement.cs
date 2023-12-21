@@ -14,7 +14,11 @@
         {
             try
             {
-                exportDirectory ??= Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader\export\");
+                if (string.IsNullOrEmpty(exportDirectory)) 
+                {
+                    exportDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\export\");
+                }
+                
                 string[] TXTFiles = Directory.GetFiles(exportDirectory, "*.txt");
                 if (TXTFiles.Length == 0)
                 {

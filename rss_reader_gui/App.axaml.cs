@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using rss_reader_gui.ViewModels;
@@ -26,6 +25,7 @@ namespace rss_reader_gui
                 {
                     DataContext = new MainWindowViewModel(),
                 };
+
             }
 
             base.OnFrameworkInitializationCompleted();

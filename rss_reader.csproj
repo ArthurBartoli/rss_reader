@@ -28,8 +28,4 @@
 	</AssemblyAttribute>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="export\" />
-  </ItemGroup>
-
 </Project>

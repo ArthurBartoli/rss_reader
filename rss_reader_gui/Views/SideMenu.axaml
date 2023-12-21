@@ -1,35 +1,40 @@
 <UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:rss_reader_gui.ViewModels"
+        xmlns:vm="clr-namespace:rss_reader_gui.ViewModels"
 		xmlns:views ="clr-namespace:rss_reader_gui.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="768"
 		x:Class="rss_reader_gui.Views.SideMenu"
-        x:DataType="vm:MainWindowViewModel"
+        x:DataType="vm:SideMenuViewModel"
 		Background="Ivory">
 
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-		<vm:MainWindowViewModel/>
+		<vm:SideMenuViewModel/>
 	</Design.DataContext>
 
-	<StackPanel Margin="0 20">
-		<TextBlock
-		HorizontalAlignment="Center"
-		
-		
-		FontFamily="Tahoma"
-		FontSize="15"
-		FontWeight="UltraBold"
-		>
-			<Run Foreground="Gold">RS</Run><Run Foreground="Orange">S Re</Run><Run Foreground="Tomato">ader</Run>
-		</TextBlock>
-		
-		<Canvas 
-			Width="100" Height="1" 
-		Background="#FFEEDE"/>
+	<StackPanel>
+		<Panel Margin="0 20">
+			<TextBlock
+			HorizontalAlignment="Center"
+			FontFamily="Tahoma"
+			FontSize="15"
+			FontWeight="UltraBold"
+			>
+				<Run Foreground="Gold">RS</Run><Run Foreground="Orange">S Re</Run><Run Foreground="Tomato">ader</Run>
+			</TextBlock>
+			<Canvas Margin="0 17"
+				Width="100" Height="1" 
+			Background="#FFEEDE"/>
+		</Panel>
+		<Panel Margin="10 0">
+			<TextBlock>Available exports :</TextBlock>
+		</Panel>
+		<Panel Margin="10 10">
+			<ListBox ItemsSource="{Binding Exports}" />
+		</Panel>
 
 
 
