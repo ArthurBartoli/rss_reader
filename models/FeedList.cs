@@ -40,16 +40,14 @@ namespace rss_reader.models
                     return;
                 }
 
-                using (StreamWriter F = new StreamWriter(path))
+                using StreamWriter F = new(path);
+                foreach (string item in Feeds.Keys)
                 {
-                    foreach (string item in Feeds.Keys)
-                    {
-                        F.WriteLine("####################");
-                        F.WriteLine(Feeds[item].Title + "||");
-                        F.WriteLine(Feeds[item].Description + "||");
-                        F.WriteLine(Feeds[item].LastBuildDate + "||");
-                        F.WriteLine(Feeds[item].Link);
-                    }
+                    F.WriteLine("####################");
+                    F.WriteLine(Feeds[item].Title + "||");
+                    F.WriteLine(Feeds[item].Description + "||");
+                    F.WriteLine(Feeds[item].LastBuildDate + "||");
+                    F.WriteLine(Feeds[item].Link);
                 }
             }
             catch (Exception e)
@@ -70,7 +68,7 @@ namespace rss_reader.models
                     F.ReadLine();
 
                     string line;
-                    while ((line = F.ReadLine()) != null) { importBuilder.Append(line); }
+                    while ((line = F.ReadLine()!) != null) { importBuilder.Append(line); }
                 }
 
                 string import = importBuilder.ToString();

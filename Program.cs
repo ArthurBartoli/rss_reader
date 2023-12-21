@@ -3,10 +3,10 @@ using rss_reader.controllers;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         FeedList feed_list = new();
-        FeedList feed_list2 = new();
+        _ = new FeedList();
         string SOLUTION_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\rss_reader");
         string EXPORT_DIR = Path.Combine(SOLUTION_DIR, "export\\export.txt");
         string[] sample_feeds = new string[3] {

@@ -140,11 +140,9 @@ namespace rss_reader.controllers
                 if (COMMAND_LIST.Contains(command[1]))
                 {
                     string path_help_file = Path.Combine(HELP_DIR, command[1] + ".txt");
-                    using (StreamReader F = new(path_help_file))
-                    {
-                        string content = F.ReadToEnd();
-                        Console.WriteLine(content);
-                    }
+                    using StreamReader F = new(path_help_file);
+                    string content = F.ReadToEnd();
+                    Console.WriteLine(content);
                     return;
                 }
                 else

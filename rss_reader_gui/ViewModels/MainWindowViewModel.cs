@@ -1,4 +1,6 @@
-﻿namespace rss_reader_gui.ViewModels
+﻿using System.Collections.Generic;
+
+namespace rss_reader_gui.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
