@@ -1,16 +1,29 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using rss_reader_gui.Models;
 using System;
 using System.Diagnostics;
 
 namespace rss_reader_gui.Views
-{
+{ 
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            RepositoryCentral.SelectedExportChanged += OnSelectedExportChanged;
+        }
+
+        
+        public void OnSelectedExportChanged(object sender, SelectedExportChangedEventArgs e)
+        {
+            isLoadedText.Text = e.SelectedExport + " is loaded !";
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            RepositoryCentral.SelectedExportChanged -= OnSelectedExportChanged;
         }
 
         public void OnKeyDown(object sender, KeyEventArgs e)

@@ -57,6 +57,11 @@
 				ZIndex="1"
 				PointerPressed="Overlay_Click">
 		</Border>
+
+		<TextBlock Name="isLoadedText" 
+				   Text="Nothing is loaded !"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"/>
 		
 		
 	

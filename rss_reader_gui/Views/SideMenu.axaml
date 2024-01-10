@@ -33,12 +33,14 @@
 			<TextBlock>Available exports :</TextBlock>
 		</Panel>
 		<Panel Margin="10 10">
-			<ListBox ItemsSource="{Binding Exports}" />
+			<ListBox ItemsSource="{Binding Exports}" 
+					 Name="export_selection"
+					 SelectionChanged="OnExportSelect"/>
 		</Panel>
-
-
-
-
+		<Panel>
+			<TextBlock Name="selected_export" Text="No export selected"/>
+		</Panel>
+		
 	</StackPanel>
 
 

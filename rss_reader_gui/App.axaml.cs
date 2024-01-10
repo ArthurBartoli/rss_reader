@@ -30,5 +30,7 @@ namespace rss_reader_gui
 
             base.OnFrameworkInitializationCompleted();
         }
+
+
     }
 }
