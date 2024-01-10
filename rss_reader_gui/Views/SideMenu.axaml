@@ -15,8 +15,6 @@
 		<vm:SideMenuViewModel/>
 	</Design.DataContext>
 
-	<!-- TODO: Make a proper panel structure because i'm not entirely sure i'm
-	not doing a mess out of this-->
 	<StackPanel>
 		<Panel Margin="0 20">
 			<TextBlock
@@ -31,16 +29,20 @@
 				Width="100" Height="1" 
 			Background="#FFEEDE"/>
 		</Panel>
-		<TextBox Text="The selected export is :"/>
 		<Panel Margin="10 0">
 			<TextBlock>Available exports :</TextBlock>
 		</Panel>
 		<Panel Margin="10 10">
-			<ListBox x:Name="export_itembox"
-					 Items="{Binding ExportItems}"
-					 SelectedItem="{Binding SelectedExport}"/>
+			<ListBox ItemsSource="{Binding Exports}" />
 		</Panel>
 
+
+
+
 	</StackPanel>
+
+
+
+
 
 </UserControl>

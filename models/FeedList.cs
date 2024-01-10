@@ -4,7 +4,7 @@ using System.Text;
 
 namespace rss_reader.models
 {
-    public class FeedList
+    internal class FeedList
     {
         public Dictionary<string, Feed> Feeds { get; set; }
 

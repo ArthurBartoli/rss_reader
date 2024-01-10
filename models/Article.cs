@@ -1,5 +1,5 @@
 namespace rss_reader.models {
-    public class Article {
+    class Article {
         public Article(string title, string link, string pubDate, string description)
         {
             Title = title;

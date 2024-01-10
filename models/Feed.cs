@@ -1,6 +1,6 @@
 namespace rss_reader.models;
 
-public class Feed
+class Feed
 {
     public string Title { get; set; }
     public string Description { get; set; }
