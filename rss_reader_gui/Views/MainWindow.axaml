@@ -30,7 +30,6 @@
 			</Style>
 
 		</Style>
-		
 	</Window.Styles>
 
     <Design.DataContext>
@@ -40,17 +39,12 @@
     </Design.DataContext>
 
 	<Grid>
-		<!-- Overlay -->
-		
-
 		<views:SideMenu Name="SideMenu" HorizontalAlignment="Left" Width="0" ZIndex="2"/>
-
 		<Button Name="HamburgerButton"
-				Click="HamburgerButton_Click"
-				ZIndex="2">
+			Click="HamburgerButton_Click"
+			ZIndex="2">
 			<TextBlock Text="&#x2630;" FontSize="22" Foreground="#708090"/>
 		</Button>
-
 		<Border Name="Overlay"
 				Background="#AA000000"
 				IsVisible="False"
@@ -58,17 +52,28 @@
 				PointerPressed="Overlay_Click">
 		</Border>
 
-		<TextBlock Name="isLoadedText" 
-				   Text="Nothing is loaded !"
-				   HorizontalAlignment="Center"
-				   VerticalAlignment="Center"/>
-		
-		
-	
-	</Grid>	
-	
-	
+		<Grid ShowGridLines="True"
+			  Margin="50 20">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="2*"/>
+			</Grid.ColumnDefinitions>
 
-	
+			<StackPanel Grid.Column="0">
+				<TextBlock>Hello I'm the feed selection screen :)</TextBlock>
+			</StackPanel>
+			
+			<StackPanel Grid.Column="1"
+						Margin="20 0">
+				<TextBlock>Heyo I'm the article selection and reading screen :o</TextBlock>
+				<Separator/>
+				<TextBlock Name="isLoadedText" Text="Nothin' loaded !"
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"/>
+			</StackPanel>
+			
+		</Grid>
+		
+	</Grid>
 
 </Window>

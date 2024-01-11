@@ -17,7 +17,6 @@ namespace rss_reader_gui.Views
         public void OnExportSelect(object sender, SelectionChangedEventArgs e)
         {
             var selected_export_name = export_selection.SelectedItem as string;
-            selected_export.Text = selected_export_name;
             RepositoryCentral.Selected_Export = selected_export_name;
         }
     }

@@ -37,9 +37,6 @@
 					 Name="export_selection"
 					 SelectionChanged="OnExportSelect"/>
 		</Panel>
-		<Panel>
-			<TextBlock Name="selected_export" Text="No export selected"/>
-		</Panel>
 		
 	</StackPanel>
 
