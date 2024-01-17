@@ -60,7 +60,8 @@
 			</Grid.ColumnDefinitions>
 
 			<StackPanel Grid.Column="0">
-				<TextBlock>Hello I'm the feed selection screen :)</TextBlock>
+				<TextBlock Name="test" FontSize="8" Text="Heu bonjour"/>
+				<ListBox ItemsSource="{Binding Feeds}"/>
 			</StackPanel>
 			
 			<StackPanel Grid.Column="1"

@@ -1,9 +1,14 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using rss_reader.models;
 using rss_reader_gui.Models;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace rss_reader_gui.Views
 { 
@@ -16,9 +21,18 @@ namespace rss_reader_gui.Views
         }
 
         
-        public void OnSelectedExportChanged(object sender, SelectedExportChangedEventArgs e)
+        public async void OnSelectedExportChanged(object sender, SelectedExportChangedEventArgs e)
         {
             isLoadedText.Text = e.SelectedExport + " is loaded !";
+            FeedList feedList = new();
+
+            string relativePath = @"..\..\..\..\..\rss_reader\export\";
+            string absoluteExportDirPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
+            string EXPORT_PATH = Path.Combine(absoluteExportDirPath, e.SelectedExport.ToString() + ".txt");
+            await feedList.ImportListAsync(EXPORT_PATH);
+
+            List<string> myKeys = [.. feedList.Feeds.Keys];
+            test.Text = EXPORT_PATH;
         }
         protected override void OnClosed(EventArgs e)
         {
