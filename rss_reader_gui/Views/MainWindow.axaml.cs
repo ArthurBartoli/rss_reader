@@ -32,7 +32,7 @@ namespace rss_reader_gui.Views
             await feedList.ImportListAsync(EXPORT_PATH);
 
             List<string> myKeys = [.. feedList.Feeds.Keys];
-            test.Text = EXPORT_PATH;
+
         }
         protected override void OnClosed(EventArgs e)
         {

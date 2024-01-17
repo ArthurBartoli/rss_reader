@@ -23,10 +23,16 @@ namespace rss_reader_gui.ViewModels
         public async void LoadFeedList(object sender, SelectedExportChangedEventArgs e)
         {
             feedList = new FeedList();
-            string EXPORT_DIR_PATH = Path.Combine(Directory.GetCurrentDirectory(), @"\..\..\..\rss_reader\export\");
-            string EXPORT_PATH = Path.Combine(EXPORT_DIR_PATH, e.SelectedExport.ToString() + ".txt");
+            string relativePath = @"..\..\..\..\..\rss_reader\export\";
+            string absoluteExportDirPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
+            string EXPORT_PATH = Path.Combine(absoluteExportDirPath, e.SelectedExport.ToString() + ".txt");
             await feedList.ImportListAsync(EXPORT_PATH);
-            Feeds = new ObservableCollection<string>(feedList.Feeds.Keys);
+            List<string> feedNames = new List<string>();
+            foreach (string k in feedList.Feeds.Keys)
+            {
+                feedNames.Add(feedList.Feeds[k].Title);
+            }
+            Feeds = new ObservableCollection<string>(feedNames);
         }
 
 
