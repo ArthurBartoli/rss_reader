@@ -1,9 +1,12 @@
 ﻿using Avalonia.Controls;
 using rss_reader.models;
+using rss_reader.toolbox;
 using rss_reader_gui.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -14,6 +17,9 @@ namespace rss_reader_gui.ViewModels
 #pragma warning disable CA1822 // Mark members as static
         public string Greeting => "Welcome to RSS Reader :)!";
 #pragma warning restore CA1822 // Mark members as static
+
+        public Feed _selected_feed;
+
         public MainWindowViewModel()
         {
             RepositoryCentral.SelectedExportChanged += LoadFeedList;
@@ -45,10 +51,10 @@ namespace rss_reader_gui.ViewModels
         {
             string selection = e.ToString();
             var feedKey = feedList.Feeds.First(kvp => kvp.Value.Equals(selection)).Key;
-            Feed selected_feed = feedList.Feeds[feedKey];
+            _selected_feed = feedList.Feeds[feedKey];
 
             List<string> articleNames = new();
-            foreach (Article item in selected_feed.Articles.Values)
+            foreach (Article item in _selected_feed.Articles.Values)
             {
                 articleNames.Add(item.Title);
             }
@@ -56,31 +62,53 @@ namespace rss_reader_gui.ViewModels
         }
 
 
-        private ObservableCollection<string> _article;
+        private string _article;
 
-        public ObservableCollection<string> Article
+        public string Article
         {
             get { return _article; }
-            set { SetProperty(ref _article, value); }
+            set {
+                SetProperty(ref _article, value);
+
+                // We get the article from the dict using the Article name 
+                string articleKey = DictTools.GetKeyFromItem(_selected_feed.Articles, Article);
+                string url = _selected_feed.Articles[articleKey].Link;
+                // Then we get the url from this article
+
+                // see https://stackoverflow.com/questions/4580263/how-to-open-in-default-browser-in-c-sharp
+                Process.Start("explorer", url);
+            }
         }
+
+        private void UpdateSelectedFeedAndArticles(string feedTitle)
+        {
+            var feedKvp = feedList.Feeds.FirstOrDefault(x => x.Value.Title.Equals(feedTitle));
+            if (!feedKvp.Equals(default(KeyValuePair<string, Feed>)))
+            {
+                _selected_feed = feedKvp.Value;
+
+                var articleNames = _selected_feed.Articles.Values.Select(article => article.Title).ToList();
+                Articles = new ObservableCollection<string>(articleNames);
+            }
+            else
+            {
+                _selected_feed = null;
+                var articleNames = new List<string> { "Something went wrong while selecting the feed." };
+                Articles = new ObservableCollection<string>(articleNames);
+            }
+        }
+
 
         private string _feed;
 
         public string Feed
         {
             get { return _feed; }
-            set { 
-                SetProperty(ref _feed, value);
-                string selection = Feed;
-                var feedKey = feedList.Feeds.First(x => x.Value.Title == selection).Key;
-                Feed selected_feed = feedList.Feeds[feedKey];
-
-                List<string> articleNames = new();
-                foreach (Article item in selected_feed.Articles.Values)
+            set {
+                if (SetProperty(ref _feed, value))
                 {
-                    articleNames.Add(item.Title);
+                    UpdateSelectedFeedAndArticles(value);
                 }
-                Articles = new ObservableCollection<string>(articleNames);
             }
         }
 
