@@ -1,0 +1,15 @@
+####################
+FeedForAll Sample Feed||
+RSS is a fascinating technology. The uses for RSS are expanding daily. Take a closer look at how various industries are using the benefits of RSS in their businesses.||
+Tue, 19 Oct 2004 13:39:14 -0400||
+https://www.feedforall.com/sample.xml
+####################
+Sample Feed - Favorite RSS Related Software & Resources||
+Take a look at some of FeedForAll's favorite software and resources for learning more about RSS.||
+Mon, 1 Nov 2004 13:17:17 -0500||
+https://www.feedforall.com/sample-feed.xml
+####################
+An RSS Daily News Feed from FeedForAll - RSS Feed Creation.||
+RSS is a fascinating technology. The uses for RSS are expanding daily. Take a closer look at how various industries are using the benefits of RSS in their businesses. New information related to RSS feeds and using RSS for marketing is posted on a regular basis.||
+Mon, 15 Mar 2021 08:20:56 -0400||
+https://www.feedforall.com/blog-feed.xml

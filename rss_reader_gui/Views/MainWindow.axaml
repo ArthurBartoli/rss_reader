@@ -1,0 +1,85 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:rss_reader_gui.ViewModels"
+		xmlns:views ="clr-namespace:rss_reader_gui.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        x:Class="rss_reader_gui.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="\Assets\Papirus-Team-Papirus-Devices-Cpu.ico"
+        Title="RSS READER"
+		Background="Ivory"
+		KeyDown="OnKeyDown">
+
+	<Window.Styles>
+		<Style Selector="Button#HamburgerButton">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Foreground" Value="Transparent"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Margin" Value="5 10"/>
+
+			<Style Selector="^:pointerover">
+				<Setter Property="Background" Value="DarkGray"/>
+			</Style>
+
+			<Style Selector="^:pressed">
+				<Setter Property="Background" Value="Black"/>
+				<Setter Property="Foreground" Value="Yellow"/>
+			</Style>
+
+		</Style>
+	</Window.Styles>
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Grid>
+		<views:SideMenu Name="SideMenu" HorizontalAlignment="Left" Width="0" ZIndex="2"/>
+		<Button Name="HamburgerButton"
+			Click="HamburgerButton_Click"
+			ZIndex="2">
+			<TextBlock Text="&#x2630;" FontSize="22" Foreground="#708090"/>
+		</Button>
+		<Border Name="Overlay"
+				Background="#AA000000"
+				IsVisible="False"
+				ZIndex="1"
+				PointerPressed="Overlay_Click">
+		</Border>
+
+		<Grid ShowGridLines="True"
+			  Margin="50 20">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="2*"/>
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Grid.Column="0">
+				<TextBlock>Yoyo i'm the feed selection screen</TextBlock>
+				<Separator/>
+				<ListBox ItemsSource="{Binding Feeds}"
+						 SelectedItem="{Binding Feed}"
+						 Name="feed_selection"/>
+			</StackPanel>
+			
+			<StackPanel Grid.Column="1"
+						Margin="20 0">
+				<TextBlock>Heyo I'm the article selection and reading screen :o</TextBlock>
+				<Separator/>
+				<TextBlock Name="isLoadedText" Text="Nothin' loaded !"
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"/>
+				<ListBox ItemsSource="{Binding Articles}"
+						 SelectedItem="{Binding Article}"/>
+			</StackPanel>
+			
+		</Grid>
+		
+	</Grid>
+
+</Window>

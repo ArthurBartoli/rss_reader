@@ -1,0 +1,7 @@
+This command is mainly to navigate feeds and articles loaded in the program and get the corresponding indices.
+The structure is simple, 'display' followed by the scope of interest; either 'feeds', 'feed' or 'article'
+- 'feeds': List of all feeds loaded in the program and the corresponding index of selection
+- 'feed': List of all articles in a feed, its properties and the corresponding index of selection 
+	'display feed 0' --> Displays the list of articles of the feed indexed by 0
+- 'article': Displays the properties of the selected article 
+	'display article 2.3' --> Displays the article 3 of the feed 2

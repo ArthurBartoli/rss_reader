@@ -1,0 +1,1 @@
+Cleans the console and returns to the main menu. Does NOT unload the exports or feed lists. 
