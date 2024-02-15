@@ -1,0 +1,1 @@
+I tried to rewrite the gitignore and erased the master branch. Shit happens. Good i was about to merge with the dev branch.
