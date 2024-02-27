@@ -2,7 +2,6 @@
 {
     static public class RSSDataManagement
     {
-        public static Dictionary<string, (string, string)> ListExports(string exportDirectory = "")
         /// <summary>
         ///     Returns the full list of RSS Feed list exports from a directory of exports, by default the one 
         ///     included in the root.
@@ -11,6 +10,7 @@
         /// <returns>
         ///     A dictionary of <string, (string, string)> which is in the form of <id, (filename, path)>
         /// </returns>
+        public static Dictionary<string, (string, string)> ListExports(string exportDirectory = "")
         {
             try
             {

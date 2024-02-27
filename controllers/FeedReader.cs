@@ -21,6 +21,7 @@ namespace rss_reader.controllers
             using var client = new HttpClient(); // to send query and read response
             return await client.GetStringAsync(url); // await the http answer
         }
+
         /// <summary>
         /// Asynchronous version of the <see cref="ParseFeed"/> method because it awaits for the URL response
         /// of the <see cref="GetFeedXml(string)"/> method.
@@ -60,6 +61,7 @@ namespace rss_reader.controllers
                 return null;
             }
         }
+
         /// <summary>
         /// Asynchronous version of <see cref="ReadFeed"/> because it awaits for the URL response
         /// of the <see cref="GetFeedXml(string)"/> method.

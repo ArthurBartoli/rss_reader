@@ -1,4 +1,9 @@
 namespace rss_reader.models {
+    /// <summary>
+    /// Contains all metadata collected from the XML Feed parsing of an article.
+    /// This includes title, link, date of publication and description.
+    /// The link is meant to be opened in the user's web browser.
+    /// </summary>
     public class Article {
         public Article(string title, string link, string pubDate, string description)
         {
