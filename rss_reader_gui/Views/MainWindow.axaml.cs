@@ -29,7 +29,7 @@ namespace rss_reader_gui.Views
         /// Handles the SelectedExportChanged event. Loads the selected export option and updates
         /// the feed list accordingly.
         /// </summary>
-        /// <param name="sender">The source of the vent.</param>
+        /// <param name="sender">The source of the event.</param>
         /// <param name="e">A SelectedExportChangedEventArgs containing the event.</param>
         public async void OnSelectedExportChanged(object sender, SelectedExportChangedEventArgs e)
         {
