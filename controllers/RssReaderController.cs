@@ -4,8 +4,14 @@ using rss_reader.toolbox;
 
 namespace rss_reader.controllers
 {
+    /// <summary>
+    /// Contains the main loop for the console app and handles commands.
+    /// </summary>
     class RssReaderController
     {
+        /// <summary>
+        /// Runs the main menu by asking user input and managing the command
+        /// </summary>
         public static void MainMenu()
         {
             try
@@ -79,7 +85,17 @@ namespace rss_reader.controllers
             }
         }
 
-        // COMMAND METHODS BELOW
+        /// <summary>
+        /// Guesses the right command from a list of possible commands using <see cref="LevenshteinDistance">Levenshtein distance</see>.
+        /// </summary>
+        /// <param name="command">String of a command to guess.</param>
+        /// <returns>A string of the best possible guess.</returns>
+        /// <remarks>
+        /// Given the commands "list", "exit", "main", "load", "display", "help", "quit" and 
+        /// an input between 1 and 10 characters, there is a 5.04 x 10^-21 probability of
+        /// hash collapse.
+        /// This probability falls with more (diverse) commands/more characters in the input.
+        /// </remarks>
         static string Command_Guess(string command)
         {
             try
@@ -113,6 +129,11 @@ namespace rss_reader.controllers
                 return " !!!!!! " + e.Message;
             }
         }
+        /// <summary>
+        /// Reads a help file from the help folder corresponding the input or general help
+        /// if only "help" was used 
+        /// </summary>
+        /// <param name="command">List of strings containing the 'help' command + command</param>
         static void Command_Help(List<string> command)
         {
             try
@@ -157,7 +178,12 @@ namespace rss_reader.controllers
                 Console.WriteLine(" !!!!!! " + e.Message);
             }
         }
-
+        /// <summary>
+        /// Displays what content the user wants to display, either a feed, all feeds or an article.
+        /// The command must be in the form of display (feeds | feed [feed_id] | article [feed_id.article_id])
+        /// </summary>
+        /// <param name="command">List of strings containing the command display (feeds | feed [feed_id] | article [feed_id.article_id]) </param>
+        /// <param name="tmp">FeedList already loaded in the app and collecting all feeds and their articles.</param>
         static void Command_Display(List<string> command, FeedList tmp)
         {
             try
