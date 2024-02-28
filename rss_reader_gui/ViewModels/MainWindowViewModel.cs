@@ -2,8 +2,6 @@
 using rss_reader.models;
 using rss_reader.toolbox;
 using rss_reader_gui.Models;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -12,14 +10,24 @@ using System.Linq;
 
 namespace rss_reader_gui.ViewModels
 {
+    /// <summary>
+    /// Avalonia view-model class for handling the bridge between logic and modeled data 
+    /// behind the main view of the application. 
+    /// This view will display a list of <see cref="Feed">feeds</see> and a list of <see cref="Article">articles</see>. 
+    /// </summary>
     public partial class MainWindowViewModel : ViewModelBase
     {
+        // TODO: REMOVED THIS
 #pragma warning disable CA1822 // Mark members as static
         public string Greeting => "Welcome to RSS Reader :)!";
 #pragma warning restore CA1822 // Mark members as static
 
         public Feed _selected_feed;
 
+        /// <summary>
+        /// Initializes a new instance of the MainWindowViewModel class, subscribes to the SelectedExportChanged
+        /// event, and initializes the Feeds and Articles collections with default values.
+        /// </summary>
         public MainWindowViewModel()
         {
             RepositoryCentral.SelectedExportChanged += LoadFeedList;
@@ -27,8 +35,17 @@ namespace rss_reader_gui.ViewModels
             Feeds = new ObservableCollection<string>(FullExportsList);
             Articles = new ObservableCollection<string>(FullExportsList);
         }
+
+        /// <summary>
+        /// Represents the collection of feeds loaded into the application. 
+        /// </summary>
         public FeedList feedList { get; set; }
 
+        /// <summary>
+        /// Loads the feed list based on the selected export option and updates the <see cref="Feeds"/> collection.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">Event data containing the selected export option.</param>
         public async void LoadFeedList(object sender, SelectedExportChangedEventArgs e)
         {
             // Import all feeds into the feedlist object
@@ -47,6 +64,11 @@ namespace rss_reader_gui.ViewModels
             Feeds = new ObservableCollection<string>(feedNames);
         }
 
+        /// <summary>
+        /// Updates the selected feed and loads articles in response to user selection.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">Event data containing the selected feed information.</param>
         public void OnFeedSelect(object sender, SelectionChangedEventArgs e)
         {
             string selection = e.ToString();
@@ -64,6 +86,9 @@ namespace rss_reader_gui.ViewModels
 
         private string _article;
 
+        /// <summary>
+        /// Gets or sets the currently selected article, opening its link in the default browser when set.
+        /// </summary>
         public string Article
         {
             get { return _article; }
@@ -80,6 +105,10 @@ namespace rss_reader_gui.ViewModels
             }
         }
 
+        /// <summary>
+        /// Updates the currently selected feed and its articles based on the provided feed title.
+        /// </summary>
+        /// <param name="feedTitle">The title of the feed to select.</param>
         private void UpdateSelectedFeedAndArticles(string feedTitle)
         {
             var feedKvp = feedList.Feeds.FirstOrDefault(x => x.Value.Title.Equals(feedTitle));
@@ -100,7 +129,9 @@ namespace rss_reader_gui.ViewModels
 
 
         private string _feed;
-
+        /// <summary>
+        /// Gets or sets the currently selected feed, updating the list of articles when set. 
+        /// </summary>
         public string Feed
         {
             get { return _feed; }
@@ -113,7 +144,9 @@ namespace rss_reader_gui.ViewModels
         }
 
         private ObservableCollection<string> _articles;
-
+        /// <summary>
+        /// Represents the collection of article titles from the currently selected feed.
+        /// </summary>
         public ObservableCollection<string> Articles
         {
             get { return _articles; }
@@ -121,7 +154,9 @@ namespace rss_reader_gui.ViewModels
         }
 
         private ObservableCollection<string> _feeds;
-
+        /// <summary>
+        /// Represents the collection of feed titles available in the application.
+        /// </summary>
         public ObservableCollection<string> Feeds
         {
             get { return _feeds; }
@@ -129,7 +164,9 @@ namespace rss_reader_gui.ViewModels
         }
 
         private ObservableCollection<string> _tmp;
-
+        /// <summary>
+        /// A temporary collection for testing or development purposes.
+        /// </summary>
         public ObservableCollection<string> tmp
         {
             get { return _tmp; }
